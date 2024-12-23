@@ -1,0 +1,16 @@
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" [routerLink]="['']">Lead Management System</a>
+      <ul class="nav justify-content-end">
+        <li class="nav-item">
+          <a class="nav-link text-white">Hello {{currentUser}}</a>
+        </li>
+          <!-- <li class="d-inline-block float_right" placement="bottom-right" display="dynamic">
+            <a class="nav-link text-white">My Account</a>
+          </li> -->
+          <li class="d-inline-block float_right" placement="bottom-right" display="dynamic">
+            <a class="nav-link text-white" (click)="logout()">Logout</a>
+          </li>
+      </ul>
+    </div>
+  </nav>

@@ -1,0 +1,17 @@
+C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSService\bin\Debug\net8.0\KAMLMSService.deps.json
+C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSService\bin\Debug\net8.0\KAMLMSService.dll
+C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSService\bin\Debug\net8.0\KAMLMSService.pdb
+C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSService\bin\Debug\net8.0\KAMLMSContracts.dll
+C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSService\bin\Debug\net8.0\KAMLMSRepository.dll
+C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSService\bin\Debug\net8.0\KAMLMSContracts.pdb
+C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSService\bin\Debug\net8.0\KAMLMSRepository.pdb
+C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSService\obj\Debug\net8.0\KAMLMSService.csproj.AssemblyReference.cache
+C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSService\obj\Debug\net8.0\KAMLMSService.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSService\obj\Debug\net8.0\KAMLMSService.AssemblyInfoInputs.cache
+C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSService\obj\Debug\net8.0\KAMLMSService.AssemblyInfo.cs
+C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSService\obj\Debug\net8.0\KAMLMSService.csproj.CoreCompileInputs.cache
+C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSService\obj\Debug\net8.0\KAMLMSService.csproj.CopyComplete
+C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSService\obj\Debug\net8.0\KAMLMSService.dll
+C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSService\obj\Debug\net8.0\refint\KAMLMSService.dll
+C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSService\obj\Debug\net8.0\KAMLMSService.pdb
+C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSService\obj\Debug\net8.0\ref\KAMLMSService.dll

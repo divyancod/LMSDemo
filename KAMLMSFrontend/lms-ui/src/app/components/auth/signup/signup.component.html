@@ -1,0 +1,41 @@
+<div class="d-flex justify-content-center align-items-center" style="background: url('../../../assets/background3.png'); background-color: rgba(12, 12, 12, 0.6);background-blend-mode: multiply;height: 100vh;background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;">
+    <div class="card" style="width: 28rem;">
+        <div class="card-body">
+            <div class="text-center">
+                <h4>Welcome to Lead Management System - Signup</h4>
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+                {{errorMessage}}
+            </div>
+            <div class="form-group">
+                <label for="fullname">Full Name</label>
+                <input type="text" class="form-control" id="fullname" placeholder="Full Name" required
+                    [(ngModel)]="name">
+            </div>
+            <div class="form-group">
+                <label for="emailaddress">Email address</label>
+                <input type="email" class="form-control" id="emailaddress" placeholder="john_smith@epam.com" required
+                    [(ngModel)]="email">
+            </div>
+
+            <div class="form-group mt-2">
+                <label for="phonenumber">Phone Number</label>
+                <input type="tel" class="form-control" id="phonenumber" [(ngModel)]="phone">
+            </div>
+
+            <div class="form-group mt-2">
+                <label for="passwordfield">Password</label>
+                <input type="password" class="form-control" id="passwordfield" [(ngModel)]="password">
+            </div>
+
+            <div class="form-group mt-2">
+                <label for="repasswordfield">Re-Password</label>
+                <input type="password" class="form-control" id="repasswordfield" [(ngModel)]="repassword">
+            </div>
+            <p>Already have account? <a [routerLink]="''">Login</a></p>
+            <button class="btn btn-dark" (click)="signUp()">SignUp</button>
+        </div>
+    </div>
+</div>

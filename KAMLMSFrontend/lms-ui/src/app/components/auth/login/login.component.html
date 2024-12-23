@@ -1,0 +1,29 @@
+<div class="d-flex justify-content-center align-items-center" style="background-color: rgba(12, 12, 12, 0.6);background-blend-mode: multiply;height: 100vh;background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;">
+    <div class="card" style="width: 28rem;">
+        <div class="card-body">
+            <div class="text-center">
+                <h4>Welcome to Lead Management System - Login</h4>
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+                {{errorMessage}}
+            </div>
+            <div class="form-group">
+                <label for="emailfield">Email address</label>
+                <input type="email" class="form-control" id="emailfield" [(ngModel)]="email"
+                    placeholder="john_smith@epam.com">
+            </div>
+
+            <div class="form-group mt-2">
+                <label for="passwordfield">Password</label>
+                <input type="password" class="form-control" id="passwordfield" [(ngModel)]="password">
+            </div>
+
+            <p>Not have account? <a [routerLink]="'/signup'">Signup</a></p>
+            <button class="btn btn-dark" (click)="loginUser()">
+                Login
+            </button>
+        </div>
+    </div>
+</div>
