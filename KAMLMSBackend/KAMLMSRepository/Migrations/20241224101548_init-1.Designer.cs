@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KAMLMSRepository.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20241223161320_init-1")]
+    [Migration("20241224101548_init-1")]
     partial class init1
     {
         /// <inheritdoc />
@@ -44,7 +44,7 @@ namespace KAMLMSRepository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("LeadsEntityId")
+                    b.Property<Guid>("LeadsId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
@@ -67,11 +67,11 @@ namespace KAMLMSRepository.Migrations
 
                     b.HasIndex("CustomRoleId");
 
-                    b.HasIndex("LeadsEntityId");
+                    b.HasIndex("LeadsId");
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("ContactEntity");
+                    b.ToTable("tbl_poc_contacts");
                 });
 
             modelBuilder.Entity("KAMLMSContracts.Entities.CustomRoleEntity", b =>
@@ -88,12 +88,56 @@ namespace KAMLMSRepository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CustomRoleEntity");
+                    b.ToTable("tbl_poc_custom_roles");
+                });
+
+            modelBuilder.Entity("KAMLMSContracts.Entities.LeadStatusEntity", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("tbl_status");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            Status = "New"
+                        },
+                        new
+                        {
+                            id = 2,
+                            Status = "InProgress"
+                        },
+                        new
+                        {
+                            id = 3,
+                            Status = "FollowUp"
+                        },
+                        new
+                        {
+                            id = 4,
+                            Status = "ClosedWon"
+                        },
+                        new
+                        {
+                            id = 5,
+                            Status = "ClosedLost"
+                        });
                 });
 
             modelBuilder.Entity("KAMLMSContracts.Entities.LeadsEntity", b =>
                 {
-                    b.Property<Guid>("ResturantId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -106,27 +150,56 @@ namespace KAMLMSRepository.Migrations
                     b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CompanyAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("ModifiedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ResturantAddress")
+                    b.Property<string>("ParentEnterpriseName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ResturantName")
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TimeZone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ResturantId");
+                    b.Property<string>("WorkingHourEnd")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WorkingHourStart")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("AddedById");
 
                     b.HasIndex("AssignedToId");
 
-                    b.ToTable("LeadsEntity");
+                    b.HasIndex("StatusId");
+
+                    b.ToTable("tbl_leads_information");
                 });
 
             modelBuilder.Entity("KAMLMSContracts.Entities.LoginEntity", b =>
@@ -153,7 +226,7 @@ namespace KAMLMSRepository.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("LoginEntities");
+                    b.ToTable("tbl_master_login");
                 });
 
             modelBuilder.Entity("KAMLMSContracts.Entities.ManagersEntity", b =>
@@ -189,7 +262,7 @@ namespace KAMLMSRepository.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("ManagersEntity");
+                    b.ToTable("tbl_kam_users");
                 });
 
             modelBuilder.Entity("KAMLMSContracts.Entities.RolesEntity", b =>
@@ -206,7 +279,7 @@ namespace KAMLMSRepository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RolesEntity");
+                    b.ToTable("tbl_poc_roles");
 
                     b.HasData(
                         new
@@ -258,6 +331,11 @@ namespace KAMLMSRepository.Migrations
                         {
                             Id = 10,
                             Name = "ITAuthority"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = "Custom"
                         });
                 });
 
@@ -277,7 +355,7 @@ namespace KAMLMSRepository.Migrations
 
                     b.HasOne("KAMLMSContracts.Entities.LeadsEntity", "LeadsEntity")
                         .WithMany()
-                        .HasForeignKey("LeadsEntityId")
+                        .HasForeignKey("LeadsId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -306,9 +384,17 @@ namespace KAMLMSRepository.Migrations
                         .WithMany()
                         .HasForeignKey("AssignedToId");
 
+                    b.HasOne("KAMLMSContracts.Entities.LeadStatusEntity", "status")
+                        .WithMany()
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("AddedBy");
 
                     b.Navigation("AssignedTo");
+
+                    b.Navigation("status");
                 });
 #pragma warning restore 612, 618
         }

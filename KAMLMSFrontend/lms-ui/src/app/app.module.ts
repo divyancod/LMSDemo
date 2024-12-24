@@ -6,7 +6,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { FormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { AuthCallInterceptor } from './service/auth-call.interceptor';
 
 
 @NgModule({
@@ -14,14 +15,14 @@ import {HttpClientModule} from '@angular/common/http';
     AppComponent,
     LoginComponent,
     SignupComponent
-  ],
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{provide:HTTP_INTERCEPTORS,useClass:AuthCallInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -23,6 +23,7 @@ builder.Services.AddScoped<IContactsManagementService, ContactsManagementService
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<JWTTokenHandler, JWTTokenHandler>();
+builder.Services.AddScoped<IDataControlService, DataControlService>();
 
 
 builder.Services.AddAuthentication(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme).

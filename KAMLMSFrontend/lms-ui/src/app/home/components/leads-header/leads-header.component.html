@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="row">
+        <div class="mt-2">
+            <button class="btn btn-dark" appBackBtn>Back</button>
+        </div>
+        <div class="card p-4 m-2">
+            <h3 class="card-title">Lead Info</h3>
+            <div class="card-body">
+                <div class="row">
+                    <div class="mb-3">
+                        <strong>ID:</strong> {{ currentLead?.id }}
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <strong>Company Name:</strong> {{ currentLead?.companyName }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <strong>Parent Enterprise:</strong> {{ currentLead?.parentEnterpriseName }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <strong>Company Email:</strong> {{ currentLead?.companyEmail }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <strong>Company Address:</strong> {{ currentLead?.companyAddress }}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-4">
+                            <strong>Country:</strong> {{ currentLead?.country }}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div>
+                            <strong>Time Zone:</strong> {{ currentLead?.timeZone }}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div>
+                            <strong>Working Hours:</strong> {{ currentLead?.workingHourStart }} - {{ currentLead?.workingHourEnd }}
+                        </div>
+                    </div>
+
+
+
+                    <div *ngIf="!showMinimum">
+
+
+                        
+                        <div class="d-flex">
+                            
+                            
+                            
+                        </div>
+                        <div class="mb-3">
+                            <strong>Comment:</strong> {{ currentLead?.comment }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,2 +1,6 @@
-<p>dashboard works!</p>
 <app-header></app-header>
+<div>
+    <div *ngFor="let item of homeLeads?.data" class="m-3">
+        <app-leads-list [current]="item"></app-leads-list>
+    </div>
+</div>

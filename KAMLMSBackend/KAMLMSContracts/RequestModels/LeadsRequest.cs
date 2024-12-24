@@ -2,8 +2,15 @@
 {
     public class LeadsRequest
     {
-        public string ResturantName { get; set; }
-        public string ResturantAddress { get; set; }
-        public string Comment { get; set; }
+        public string ParentEnterpriseName { get; set; }
+        public string CompanyName { get; set; }
+        public string CompanyEmail { get; set; }
+        public string CompanyAddress { get; set; }
+        public string Country { get; set; }
+        public string TimeZone { get; set; }
+        public string WorkingHourStart { get; set; }
+        public string WorkingHourEnd { get; set; }
+
+        public string? Comment { get; set; }
     }
 }

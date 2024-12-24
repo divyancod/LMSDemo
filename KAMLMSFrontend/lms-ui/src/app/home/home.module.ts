@@ -6,6 +6,15 @@ import { HomeComponent } from './components/home/home.component';
 import { NavComponent } from './components/nav/nav.component';
 import { HeaderComponent } from './components/header/header.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AddLeadComponent } from './components/add-lead/add-lead.component';
+import { FormsModule } from '@angular/forms';
+import { AddPocComponent } from './components/add-poc/add-poc.component';
+import { LeadsHeaderComponent } from './components/leads-header/leads-header.component';
+import { LeadsListComponent } from './components/leads-list/leads-list.component';
+import { LeadCardComponent } from './components/lead-card/lead-card.component';
+import { LeadsInfoComponent } from './components/leads-info/leads-info.component';
+import { PocListComponent } from './components/poc-list/poc-list.component';
+import { BackBtnDirective } from '../directive/back-btn.directive';
 
 
 @NgModule({
@@ -13,11 +22,20 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     HomeComponent,
     NavComponent,
     HeaderComponent,
-    DashboardComponent
+    DashboardComponent,
+    AddLeadComponent,
+    AddPocComponent,
+    LeadsHeaderComponent,
+    BackBtnDirective,
+    LeadsListComponent,
+    LeadCardComponent,
+    LeadsInfoComponent,
+    PocListComponent
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    FormsModule
   ]
 })
 export class HomeModule { }

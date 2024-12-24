@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace KAMLMSContracts.Entities
 {
+    [Table("tbl_master_login")]
     public class LoginEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

@@ -1,9 +1,5 @@
 ﻿using KAMLMSContracts.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using KAMLMSContracts.ResponseModels;
 
 namespace KAMLMSRepository.Interfaces
 {
@@ -11,5 +7,8 @@ namespace KAMLMSRepository.Interfaces
     {
         LeadsEntity AddLead(LeadsEntity leads);
         LeadsEntity GetLead(Guid id);
+        IList<LeadStatusEntity> GetLeadTypes();
+        IList<LeadsEntity> GetLeads(int take, int page, int type);
+        IList<DashboardResponse> GetDataForDashboard();
     }
 }

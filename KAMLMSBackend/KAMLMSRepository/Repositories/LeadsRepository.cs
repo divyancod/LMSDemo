@@ -1,5 +1,7 @@
 ﻿using KAMLMSContracts.Entities;
+using KAMLMSContracts.ResponseModels;
 using KAMLMSRepository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace KAMLMSRepository.Repositories
 {
@@ -16,9 +18,24 @@ namespace KAMLMSRepository.Repositories
             return leads;
         }
 
+        public IList<DashboardResponse> GetDataForDashboard()
+        {
+            return databaseContext.DashboardResponse.FromSqlRaw("exec GetDashboardProducts").ToList();
+        }
+
         public LeadsEntity GetLead(Guid id)
         {
-            return databaseContext.LeadsEntity.FirstOrDefault(e => e.ResturantId == id);
+            return databaseContext.LeadsEntity.FirstOrDefault(e => e.Id == id);
+        }
+
+        public IList<LeadsEntity> GetLeads(int take, int page, int type)
+        {
+            return databaseContext.LeadsEntity.Include(x => x.AssignedTo).Include(x => x.status).Where(x => x.StatusId == type).Skip(page * take).Take(take).ToList();
+        }
+
+        public IList<LeadStatusEntity> GetLeadTypes()
+        {
+            return databaseContext.LeadStatusEntity.ToList();
         }
     }
 }

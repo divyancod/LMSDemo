@@ -173,3 +173,4 @@ C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSBackend\obj\Debug\
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSBackend\obj\Debug\net8.0\KAMLMSBackend.pdb
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSBackend\obj\Debug\net8.0\KAMLMSBackend.genruntimeconfig.cache
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSBackend\obj\Debug\net8.0\ref\KAMLMSBackend.dll
+C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSBackend\obj\Debug\net8.0\KAMLMSBackend.sourcelink.json

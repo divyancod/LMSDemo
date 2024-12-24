@@ -15,3 +15,4 @@ C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSService\obj\Debug\
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSService\obj\Debug\net8.0\refint\KAMLMSService.dll
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSService\obj\Debug\net8.0\KAMLMSService.pdb
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSService\obj\Debug\net8.0\ref\KAMLMSService.dll
+C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSService\obj\Debug\net8.0\KAMLMSService.sourcelink.json

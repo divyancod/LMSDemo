@@ -11,6 +11,16 @@
         Receptionist = 7,
         BarManager = 8,
         CustomerServiceManager = 9,
-        ITAuthority = 10
+        ITAuthority = 10,
+        Custom = 11
+    }
+
+    public enum LeadStatus
+    {
+        New = 1,
+        InProgress = 2,
+        FollowUp = 3,
+        ClosedWon = 4,
+        ClosedLost = 5
     }
 }

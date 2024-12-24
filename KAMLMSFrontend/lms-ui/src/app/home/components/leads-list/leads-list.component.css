@@ -1,0 +1,7 @@
+table.leads-table tbody tr:hover {
+    cursor: pointer !important;
+}
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: #a3a3a3;
+    color:white;
+  }

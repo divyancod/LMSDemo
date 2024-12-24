@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace KAMLMSContracts.Entities
 {
+    [Table("tbl_kam_users")]
     public class ManagersEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

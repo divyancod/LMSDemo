@@ -21,10 +21,10 @@ namespace KAMLMSBackend.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get(Guid resturantId)
+        public IActionResult Get(Guid id)
         {
-            LeadsEntity resposne = leadsService.GetLead(resturantId);
-            if(resposne==null)
+            LeadsEntity resposne = leadsService.GetLead(id);
+            if (resposne == null)
             {
                 return BadRequest("NOT FOUND");
             }
@@ -37,9 +37,9 @@ namespace KAMLMSBackend.Controllers
             Guid id;
             try
             {
-                id = leadsService.AddLeads(request);
+                id = leadsService.AddLeads(request, new Guid(User.Identity.Name));
             }
-            catch(CustomException ex)
+            catch (CustomException ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -50,11 +50,24 @@ namespace KAMLMSBackend.Controllers
             return Ok(id);
         }
 
+        [HttpGet("get-leads-types")]
+        public IActionResult GetLeadTypes()
+        {
+            return Ok(leadsService.GetLeadTypes());
+        }
+
         [HttpGet("test")]
         public IActionResult Test()
         {
             var a = User.Identity.Name;
             return Ok("OK");
+        }
+
+        [HttpGet("lead-dashboard")]
+        public IActionResult GetLeadsDashboard()
+        {
+            var response = leadsService.GetLeadDashboard();
+            return Ok(response);
         }
     }
 }

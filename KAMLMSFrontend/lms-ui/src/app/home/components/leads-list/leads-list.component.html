@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row">
+        <div class="card">
+            <div class="cardbody m-2">
+                <h5>{{current?.status}} Leads</h5>
+                <table class="table table-sm leads-table table-hover" *ngIf="current?.leads?.length!=0">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Company name</th>
+                            <th scope="col">Enterprise Name</th>
+                            <th scope="col">Assigned To</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of current?.leads; let i=index" [routerLink]="'/details/'+item.id">
+                            <th scope="row">{{i+1}}</th>
+                            <td>{{item.companyName}}</td>
+                            <td>{{item.enterpriseName}}</td>
+                            <td>{{item.assignedTo}}</td>
+                            <td>{{item.status}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p *ngIf="current?.leads?.length==0" class="d-flex justify-content-center">No data available for this section</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace KAMLMSContracts.Entities
 {
+    [Table("tbl_poc_contacts")]
     public class ContactEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -11,7 +12,7 @@ namespace KAMLMSContracts.Entities
 
         public LeadsEntity LeadsEntity { get; set; }
         [ForeignKey("LeadsEntity")]
-        public Guid LeadsEntityId { get; set; }
+        public Guid LeadsId { get; set; }
 
         public string Name { get; set; }
         public string Phone { get; set; }
@@ -33,12 +34,14 @@ namespace KAMLMSContracts.Entities
         public ManagersEntity ManagersEntity { get; set; }
     }
 
+    [Table("tbl_poc_roles")]
     public class RolesEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
     }
 
+    [Table("tbl_poc_custom_roles")]
     public class CustomRoleEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
