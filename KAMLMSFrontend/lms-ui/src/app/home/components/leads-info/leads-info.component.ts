@@ -12,7 +12,13 @@ export class LeadsInfoComponent implements OnInit {
 
   id: string = ''
   currentLead: LeadInformation | null = null;
-  constructor(private route: ActivatedRoute,private leadService:LeadsService) {
+  buttons: any[] = [{ id: 1, text: "Call Schedule History" }, { id: 2, text: "Point of contact" }, { id: 3, text: "Call Logs" }]
+  showCallSchedule: boolean = true;
+  showPoc: boolean = false;
+  showCallLog: boolean = false;
+  currentSelected:number = 1;
+
+  constructor(private route: ActivatedRoute, private leadService: LeadsService) {
     this.route.params.subscribe(params => {
       this.id = params['id']
       this.loadLeadInfo();
@@ -22,13 +28,24 @@ export class LeadsInfoComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  loadLeadInfo()
-  {
-    this.leadService.getLead(this.id).subscribe(data=>{
+  loadLeadInfo() {
+    this.leadService.getLead(this.id).subscribe(data => {
       this.currentLead = data;
-    },error=>{
+    }, error => {
 
     })
   }
 
+  toggleVariable(variable:number) {
+    this.showCallSchedule = this.showPoc = this.showCallLog = false;
+    this.currentSelected = variable
+
+    if (variable == 1) {
+      this.showCallSchedule = true;
+    } else if (variable == 2) {
+      this.showPoc = true;
+    } else if (variable == 3) {
+      this.showCallLog = true;
+    }
+  }
 }

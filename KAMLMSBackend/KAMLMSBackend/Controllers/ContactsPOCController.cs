@@ -37,5 +37,11 @@ namespace KAMLMSBackend.Controllers
         {
             return Ok(contactsManagementService.getPOC(new Guid(companyId)));
         }
+
+        [HttpGet("get-poc-min")]
+        public IActionResult getPocsMin(string companyId)
+        {
+            return Ok(contactsManagementService.getPocMin(companyId));
+        }
     }
 }

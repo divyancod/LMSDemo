@@ -23,4 +23,14 @@
         ClosedWon = 4,
         ClosedLost = 5
     }
+
+    public enum CallStatusEnum
+    {
+        Scheduled=1,
+        ReScheduled=2,
+        Completed=3,
+        Waiting=4,
+        Answered=5,
+        NotAnsered=6
+    }
 }

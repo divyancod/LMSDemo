@@ -26,6 +26,6 @@ export class AuthCallInterceptor implements HttpInterceptor {
             this.router.navigate(['login'],{queryParams:{error:'true'}})
             return of(err.message);
         }
-        return throwError(()=> new Error(err.message));
+        return throwError(()=> new Error(err.error));
     }
 }

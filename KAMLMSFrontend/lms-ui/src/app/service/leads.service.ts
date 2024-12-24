@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { LeadInformation, LeadManagement, LeadTypes } from '../models/LeadsModel';
-import { POCDetails } from '../models/POCModel';
+import { POCDetails, PocDetailsMin } from '../models/POCModel';
 
 @Injectable({
   providedIn: 'root'
@@ -40,5 +40,20 @@ export class LeadsService {
   getAllPOC(id:string)
   {
     return this.httpClient.get<POCDetails[]>(`${this.baseUrl}/contacts-poc/get-poc?companyId=${id}`);
+  }
+  getAllPOCMin(id:string)
+  {
+    return this.httpClient.get<PocDetailsMin[]>(`${this.baseUrl}/contacts-poc/get-poc-min?companyId=${id}`);
+  }
+
+  //-------------
+  scheduleCall(payload:any)
+  {
+    return this.httpClient.post(`${this.baseUrl}/call-details/schedule`,payload);
+  }
+
+  getCallScheduled(companyId:string)
+  {
+    return this.httpClient.get(`${this.baseUrl}/call-details/calls-by-companyid?companyId=${companyId}`);
   }
 }

@@ -22,3 +22,8 @@ export interface POCDetails {
     updatedAt: string;
     addedById: string;
 }
+export interface PocDetailsMin
+{
+    id:string;
+    pocName:string;
+}

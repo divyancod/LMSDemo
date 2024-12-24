@@ -1,4 +1,5 @@
 ﻿using KAMLMSContracts.Entities;
+using KAMLMSContracts.ResponseModels;
 using KAMLMSRepository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,6 +37,15 @@ namespace KAMLMSRepository.Repositories
         public IList<ContactEntity> GetPOC(Guid companyId)
         {
             return databaseContext.ContactEntity.Include(x=>x.Role).Include(x=>x.CustomRole).Where(x => x.LeadsId == companyId).ToList();
+        }
+
+        public IList<PocMinResponse> getPocMin(Guid CompanyId)
+        {
+            return databaseContext.ContactEntity.Select(x => new
+            PocMinResponse{
+                Id = x.Id,
+                PocName = x.Name
+            }).ToList();
         }
     }
 }

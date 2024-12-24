@@ -14,6 +14,35 @@ namespace KAMLMSRepository.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "DashboardResponse",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ParentEnterpriseName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StatusId = table.Column<int>(type: "int", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DashboardResponse", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tbl_call_status",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tbl_call_status", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "tbl_kam_users",
                 columns: table => new
                 {
@@ -168,6 +197,88 @@ namespace KAMLMSRepository.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "tbl_call_schedule_history",
+                columns: table => new
+                {
+                    CallScheduleId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ScheduledForId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ScheduledWithId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ScheduledById = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CallerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ScheduledAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CallStatusId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tbl_call_schedule_history", x => x.CallScheduleId);
+                    table.ForeignKey(
+                        name: "FK_tbl_call_schedule_history_tbl_call_status_CallStatusId",
+                        column: x => x.CallStatusId,
+                        principalTable: "tbl_call_status",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_tbl_call_schedule_history_tbl_kam_users_CallerId",
+                        column: x => x.CallerId,
+                        principalTable: "tbl_kam_users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_tbl_call_schedule_history_tbl_kam_users_ScheduledById",
+                        column: x => x.ScheduledById,
+                        principalTable: "tbl_kam_users",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_tbl_call_schedule_history_tbl_leads_information_ScheduledForId",
+                        column: x => x.ScheduledForId,
+                        principalTable: "tbl_leads_information",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_tbl_call_schedule_history_tbl_poc_contacts_ScheduledWithId",
+                        column: x => x.ScheduledWithId,
+                        principalTable: "tbl_poc_contacts",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tbl_call_logs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CallScheduleId = table.Column<int>(type: "int", nullable: false),
+                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tbl_call_logs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_tbl_call_logs_tbl_call_schedule_history_CallScheduleId",
+                        column: x => x.CallScheduleId,
+                        principalTable: "tbl_call_schedule_history",
+                        principalColumn: "CallScheduleId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "tbl_call_status",
+                columns: new[] { "Id", "Status" },
+                values: new object[,]
+                {
+                    { 1, "Scheduled" },
+                    { 2, "ReScheduled" },
+                    { 3, "Completed" },
+                    { 4, "Waiting" },
+                    { 5, "Answered" },
+                    { 6, "NotAnsered" }
+                });
+
             migrationBuilder.InsertData(
                 table: "tbl_poc_roles",
                 columns: new[] { "Id", "Name" },
@@ -197,6 +308,36 @@ namespace KAMLMSRepository.Migrations
                     { 4, "ClosedWon" },
                     { 5, "ClosedLost" }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tbl_call_logs_CallScheduleId",
+                table: "tbl_call_logs",
+                column: "CallScheduleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tbl_call_schedule_history_CallerId",
+                table: "tbl_call_schedule_history",
+                column: "CallerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tbl_call_schedule_history_CallStatusId",
+                table: "tbl_call_schedule_history",
+                column: "CallStatusId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tbl_call_schedule_history_ScheduledById",
+                table: "tbl_call_schedule_history",
+                column: "ScheduledById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tbl_call_schedule_history_ScheduledForId",
+                table: "tbl_call_schedule_history",
+                column: "ScheduledForId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tbl_call_schedule_history_ScheduledWithId",
+                table: "tbl_call_schedule_history",
+                column: "ScheduledWithId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_tbl_kam_users_Email",
@@ -250,7 +391,19 @@ namespace KAMLMSRepository.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "DashboardResponse");
+
+            migrationBuilder.DropTable(
+                name: "tbl_call_logs");
+
+            migrationBuilder.DropTable(
                 name: "tbl_master_login");
+
+            migrationBuilder.DropTable(
+                name: "tbl_call_schedule_history");
+
+            migrationBuilder.DropTable(
+                name: "tbl_call_status");
 
             migrationBuilder.DropTable(
                 name: "tbl_poc_contacts");

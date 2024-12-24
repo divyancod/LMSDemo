@@ -1,5 +1,6 @@
 ﻿using KAMLMSContracts.Entities;
 using KAMLMSContracts.RequestModels;
+using KAMLMSContracts.ResponseModels;
 using KAMLMSRepository.Interfaces;
 using KAMLMSService.Exceptions;
 using KAMLMSService.Interfaces;
@@ -44,6 +45,11 @@ namespace KAMLMSService.Services
         public IList<ContactEntity> getPOC(Guid CompanyId)
         {
             return contactRepo.GetPOC(CompanyId);
+        }
+
+        public IList<PocMinResponse> getPocMin(string CompanyId)
+        {
+            return contactRepo.getPocMin(new Guid(CompanyId));
         }
 
         private int getCustomRole(int roleId, string CustomRole)

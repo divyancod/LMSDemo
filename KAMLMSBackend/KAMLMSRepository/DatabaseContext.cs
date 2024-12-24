@@ -17,6 +17,9 @@ namespace KAMLMSRepository
         public DbSet<LoginEntity> LoginEntities { get; set; }
         public DbSet<LeadStatusEntity> LeadStatusEntity { get; set; }
         public DbSet<DashboardResponse> DashboardResponse { get; set; }
+        public DbSet<CallScheduleEntity> CallScheduleEntity { get; set; }
+        public DbSet<CallLogsEntity> CallLogsEntity { get; set; }
+        public DbSet<CallStatusEntity> CallStatusEntity { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -36,17 +39,41 @@ namespace KAMLMSRepository
             modelBuilder.Entity<LeadStatusEntity>().HasData(
                 Enum.GetValues(typeof(LeadStatus))
                 .Cast<LeadStatus>()
-                .Select(status=>new LeadStatusEntity
+                .Select(status => new LeadStatusEntity
                 {
                     id = (int)status,
                     Status = status.ToString()
                 }));
 
+            modelBuilder.Entity<CallStatusEntity>().HasData(
+                Enum.GetValues(typeof(CallStatusEnum))
+                .Cast<CallStatusEnum>()
+                .Select(status => new CallStatusEntity
+                {
+                    Id = (int)status,
+                    Status = status.ToString()
+                }));
+
             modelBuilder.Entity<ContactEntity>()
               .HasOne(c => c.LeadsEntity)
-              .WithMany()  
+              .WithMany()
               .HasForeignKey(c => c.LeadsId)
               .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<CallScheduleEntity>()
+                .HasOne(e => e.ScheduledBy)
+                .WithMany()
+                .HasForeignKey(e => e.ScheduledById)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<CallScheduleEntity>()
+                .HasOne(e => e.ScheduledWith)
+                .WithMany()
+                .HasForeignKey(e => e.ScheduledWithId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<CustomRoleEntity>().HasData(
+                new CustomRoleEntity { Id = 1, Name = "DEFAULT" });
         }
     }
 }

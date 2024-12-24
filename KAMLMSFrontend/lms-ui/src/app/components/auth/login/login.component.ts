@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem("lms_ui_position",data.position);
       this.router.navigate([""]);
     }, error => {
-      this.errorMessage = error.error
+      this.errorMessage = error
     })
   }
 

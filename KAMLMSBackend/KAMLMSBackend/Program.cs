@@ -24,6 +24,8 @@ builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<JWTTokenHandler, JWTTokenHandler>();
 builder.Services.AddScoped<IDataControlService, DataControlService>();
+builder.Services.AddScoped<ICallManagementService, CallManagementService>();
+builder.Services.AddScoped<ICallManagementRepository, CallManagementRepository>();
 
 
 builder.Services.AddAuthentication(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme).

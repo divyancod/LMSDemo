@@ -1,2 +1,13 @@
 <app-leads-header [currentlead]="currentLead"></app-leads-header>
-<app-poc-list [companyId]="id"></app-poc-list>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-dark m-2" *ngFor="let item of buttons"
+                (click)="toggleVariable(item.id)" [disabled]="currentSelected==item.id">{{item.text}}</button>
+
+        </div>
+    </div>
+</div>
+<app-poc-list [companyId]="id" [companyName]="currentLead?.companyName" *ngIf="showPoc"></app-poc-list>
+<app-call-scheduled-list *ngIf="showCallSchedule" [companyId]="id"></app-call-scheduled-list>
+<app-call-logs-list *ngIf="showCallLog"></app-call-logs-list>

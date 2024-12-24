@@ -30,7 +30,7 @@ export class SignupComponent implements OnInit {
       this.router.navigate(["/login"]);
     },
       error => {
-        this.errorMessage = error.error;
+        this.errorMessage = error;
        })
   }
   validation(): boolean

@@ -8,6 +8,7 @@ import { SignupComponent } from './components/auth/signup/signup.component';
 import { FormsModule } from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AuthCallInterceptor } from './service/auth-call.interceptor';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { AuthCallInterceptor } from './service/auth-call.interceptor';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [{provide:HTTP_INTERCEPTORS,useClass:AuthCallInterceptor,multi:true}],
   bootstrap: [AppComponent]

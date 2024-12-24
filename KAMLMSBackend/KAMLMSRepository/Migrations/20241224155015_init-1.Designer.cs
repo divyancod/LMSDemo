@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KAMLMSRepository.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20241224101548_init-1")]
+    [Migration("20241224155015_init-1")]
     partial class init1
     {
         /// <inheritdoc />
@@ -24,6 +24,127 @@ namespace KAMLMSRepository.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("KAMLMSContracts.Entities.CallLogsEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CallScheduleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CallScheduleId");
+
+                    b.ToTable("tbl_call_logs");
+                });
+
+            modelBuilder.Entity("KAMLMSContracts.Entities.CallScheduleEntity", b =>
+                {
+                    b.Property<int>("CallScheduleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CallScheduleId"));
+
+                    b.Property<int>("CallStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("CallerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ScheduledAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ScheduledById")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ScheduledForId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ScheduledWithId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("CallScheduleId");
+
+                    b.HasIndex("CallStatusId");
+
+                    b.HasIndex("CallerId");
+
+                    b.HasIndex("ScheduledById");
+
+                    b.HasIndex("ScheduledForId");
+
+                    b.HasIndex("ScheduledWithId");
+
+                    b.ToTable("tbl_call_schedule_history");
+                });
+
+            modelBuilder.Entity("KAMLMSContracts.Entities.CallStatusEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("tbl_call_status");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Status = "Scheduled"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Status = "ReScheduled"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Status = "Completed"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Status = "Waiting"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Status = "Answered"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Status = "NotAnsered"
+                        });
+                });
 
             modelBuilder.Entity("KAMLMSContracts.Entities.ContactEntity", b =>
                 {
@@ -337,6 +458,90 @@ namespace KAMLMSRepository.Migrations
                             Id = 11,
                             Name = "Custom"
                         });
+                });
+
+            modelBuilder.Entity("KAMLMSContracts.ResponseModels.DashboardResponse", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ParentEnterpriseName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DashboardResponse");
+                });
+
+            modelBuilder.Entity("KAMLMSContracts.Entities.CallLogsEntity", b =>
+                {
+                    b.HasOne("KAMLMSContracts.Entities.CallScheduleEntity", "CallSchedule")
+                        .WithMany()
+                        .HasForeignKey("CallScheduleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CallSchedule");
+                });
+
+            modelBuilder.Entity("KAMLMSContracts.Entities.CallScheduleEntity", b =>
+                {
+                    b.HasOne("KAMLMSContracts.Entities.CallStatusEntity", "CallStatus")
+                        .WithMany()
+                        .HasForeignKey("CallStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("KAMLMSContracts.Entities.ManagersEntity", "Caller")
+                        .WithMany()
+                        .HasForeignKey("CallerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("KAMLMSContracts.Entities.ManagersEntity", "ScheduledBy")
+                        .WithMany()
+                        .HasForeignKey("ScheduledById")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("KAMLMSContracts.Entities.LeadsEntity", "ScheduledFor")
+                        .WithMany()
+                        .HasForeignKey("ScheduledForId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("KAMLMSContracts.Entities.ContactEntity", "ScheduledWith")
+                        .WithMany()
+                        .HasForeignKey("ScheduledWithId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("CallStatus");
+
+                    b.Navigation("Caller");
+
+                    b.Navigation("ScheduledBy");
+
+                    b.Navigation("ScheduledFor");
+
+                    b.Navigation("ScheduledWith");
                 });
 
             modelBuilder.Entity("KAMLMSContracts.Entities.ContactEntity", b =>

@@ -15,6 +15,9 @@ import { LeadCardComponent } from './components/lead-card/lead-card.component';
 import { LeadsInfoComponent } from './components/leads-info/leads-info.component';
 import { PocListComponent } from './components/poc-list/poc-list.component';
 import { BackBtnDirective } from '../directive/back-btn.directive';
+import { CallScheduleComponent } from './components/call-schedule/call-schedule.component';
+import { CallScheduledListComponent } from './components/call-scheduled-list/call-scheduled-list.component';
+import { CallLogsListComponent } from './components/call-logs-list/call-logs-list.component';
 
 
 @NgModule({
@@ -30,7 +33,10 @@ import { BackBtnDirective } from '../directive/back-btn.directive';
     LeadsListComponent,
     LeadCardComponent,
     LeadsInfoComponent,
-    PocListComponent
+    PocListComponent,
+    CallScheduleComponent,
+    CallScheduledListComponent,
+    CallLogsListComponent
   ],
   imports: [
     CommonModule,
