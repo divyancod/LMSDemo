@@ -5,8 +5,8 @@ C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSContracts\obj\Debu
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSContracts\obj\Debug\net8.0\KAMLMSContracts.AssemblyInfoInputs.cache
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSContracts\obj\Debug\net8.0\KAMLMSContracts.AssemblyInfo.cs
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSContracts\obj\Debug\net8.0\KAMLMSContracts.csproj.CoreCompileInputs.cache
+C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSContracts\obj\Debug\net8.0\KAMLMSContracts.sourcelink.json
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSContracts\obj\Debug\net8.0\KAMLMSContracts.dll
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSContracts\obj\Debug\net8.0\refint\KAMLMSContracts.dll
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSContracts\obj\Debug\net8.0\KAMLMSContracts.pdb
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSContracts\obj\Debug\net8.0\ref\KAMLMSContracts.dll
-C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSContracts\obj\Debug\net8.0\KAMLMSContracts.sourcelink.json

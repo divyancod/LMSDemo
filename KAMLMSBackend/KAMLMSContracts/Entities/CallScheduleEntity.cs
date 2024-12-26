@@ -48,7 +48,6 @@ namespace KAMLMSContracts.Entities
 
         public string Comment { get; set; }
         public DateTime CreatedAt { get; set; }
-
     }
 
     [Table("tbl_call_status")]

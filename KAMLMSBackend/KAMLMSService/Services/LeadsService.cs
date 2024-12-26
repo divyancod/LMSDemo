@@ -98,25 +98,29 @@ namespace KAMLMSService.Services
             Dictionary<string, IList<LeadInfoResponse>> dictionary = new Dictionary<string, IList<LeadInfoResponse>>();
             var leadTypes = repository.GetLeadTypes();
 
-            foreach(var item in leadTypes)
+            foreach (var item in leadTypes)
             {
                 dictionary.Add(item.Status, new List<LeadInfoResponse>());
             }
 
-            foreach(var item in list)
+            foreach (var item in list)
             {
-                if(dictionary.ContainsKey(item.Status))
+                if (dictionary.ContainsKey(item.Status))
                 {
-                    dictionary[item.Status].Add(new LeadInfoResponse { AssignedTo = item.FullName, CompanyName = item.CompanyName, EnterpriseName = item.ParentEnterpriseName, Id = item.Id, Status = item.Status, StatusId=item.StatusId });
+                    dictionary[item.Status].Add(new LeadInfoResponse { AssignedTo = item.FullName, CompanyName = item.CompanyName, EnterpriseName = item.ParentEnterpriseName, Id = item.Id, Status = item.Status, StatusId = item.StatusId });
                 }
             }
             DashboardResponseWithType response = new DashboardResponseWithType();
-            foreach(var item in leadTypes)
+            foreach (var item in leadTypes)
             {
                 response.data.Add(new DashboardResponseWithLeads { id = item.id, Status = item.Status, leads = dictionary[item.Status] });
             }
             return response;
         }
 
+        public LeadsEntity UpdateLead(LeadsEntity leadsId)
+        {
+            return repository.UpdateLead(leadsId);
+        }
     }
 }

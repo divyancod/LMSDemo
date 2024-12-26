@@ -11,6 +11,7 @@ namespace KAMLMSBackend.Controllers
     public class CallDetailsController : ControllerBase
     {
         private ICallManagementService callManagementService;
+        const int DEFAULT_TAKE = 10;
         public CallDetailsController(ICallManagementService callManagementService)
         {
             this.callManagementService = callManagementService;
@@ -29,10 +30,10 @@ namespace KAMLMSBackend.Controllers
             }
         }
 
-        [HttpGet("calls-by-companyid")]
-        public IActionResult getCallsByCompanyId(string companyId)
+        [HttpPost("calls-by-companyid")]
+        public IActionResult getCallsByCompanyId([FromQuery]string companyId, [FromQuery]int page, [FromBody]CallFilters? filters)
         {
-            return Ok(callManagementService.GettAllCallScheduledByCompany(companyId));
+            return Ok(callManagementService.GettAllCallScheduledByCompany(companyId,page, DEFAULT_TAKE,filters));
         }
 
 
@@ -53,6 +54,19 @@ namespace KAMLMSBackend.Controllers
         public IActionResult getCallStatusTypes(int status)
         {
             return Ok(callManagementService.GetAllCallStatusDetails());
+        }
+
+        [HttpPost("update-call-status")]
+        public IActionResult updateCallStatus(UpdateCallScheduleRequest request)
+        {
+            try
+            {
+                callManagementService.UpdateCallStatus(request);
+                return Ok();
+            }catch
+            {
+                return BadRequest("SOMETHING WENT WRONG");
+            }
         }
     }
 }

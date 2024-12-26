@@ -19,4 +19,17 @@
     <ProjectReference Include="..\KAMLMSContracts\KAMLMSContracts.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Queries\country.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Queries\DashboardSP.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

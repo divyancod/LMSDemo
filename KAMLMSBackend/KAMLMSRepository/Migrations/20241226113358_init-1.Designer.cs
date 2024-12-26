@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KAMLMSRepository.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20241224155015_init-1")]
+    [Migration("20241226113358_init-1")]
     partial class init1
     {
         /// <inheritdoc />
@@ -142,7 +142,12 @@ namespace KAMLMSRepository.Migrations
                         new
                         {
                             Id = 6,
-                            Status = "NotAnsered"
+                            Status = "NotAnswered"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Status = "Cancelled"
                         });
                 });
 
@@ -210,6 +215,13 @@ namespace KAMLMSRepository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("tbl_poc_custom_roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "DEFAULT"
+                        });
                 });
 
             modelBuilder.Entity("KAMLMSContracts.Entities.LeadStatusEntity", b =>

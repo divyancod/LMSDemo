@@ -276,8 +276,14 @@ namespace KAMLMSRepository.Migrations
                     { 3, "Completed" },
                     { 4, "Waiting" },
                     { 5, "Answered" },
-                    { 6, "NotAnsered" }
+                    { 6, "NotAnswered" },
+                    { 7, "Cancelled" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "tbl_poc_custom_roles",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 1, "DEFAULT" });
 
             migrationBuilder.InsertData(
                 table: "tbl_poc_roles",

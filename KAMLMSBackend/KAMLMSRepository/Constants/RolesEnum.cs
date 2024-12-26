@@ -31,6 +31,7 @@
         Completed=3,
         Waiting=4,
         Answered=5,
-        NotAnsered=6
+        NotAnswered=6,
+        Cancelled=7
     }
 }

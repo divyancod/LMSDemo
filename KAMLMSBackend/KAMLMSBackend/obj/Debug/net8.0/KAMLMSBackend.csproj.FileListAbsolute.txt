@@ -1,6 +1,8 @@
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSBackend\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSBackend\bin\Debug\net8.0\appsettings.json
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSBackend\bin\Debug\net8.0\KAMLMSBackend.exe
+C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSBackend\bin\Debug\net8.0\Queries\country.sql
+C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSBackend\bin\Debug\net8.0\Queries\DashboardSP.sql
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSBackend\bin\Debug\net8.0\KAMLMSBackend.deps.json
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSBackend\bin\Debug\net8.0\KAMLMSBackend.runtimeconfig.json
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSBackend\bin\Debug\net8.0\KAMLMSBackend.dll
@@ -159,6 +161,7 @@ C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSBackend\obj\Debug\
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSBackend\obj\Debug\net8.0\KAMLMSBackend.csproj.CoreCompileInputs.cache
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSBackend\obj\Debug\net8.0\KAMLMSBackend.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSBackend\obj\Debug\net8.0\KAMLMSBackend.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSBackend\obj\Debug\net8.0\KAMLMSBackend.sourcelink.json
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSBackend\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSBackend\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSBackend\obj\Debug\net8.0\staticwebassets\msbuild.KAMLMSBackend.Microsoft.AspNetCore.StaticWebAssets.props
@@ -173,4 +176,3 @@ C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSBackend\obj\Debug\
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSBackend\obj\Debug\net8.0\KAMLMSBackend.pdb
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSBackend\obj\Debug\net8.0\KAMLMSBackend.genruntimeconfig.cache
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSBackend\obj\Debug\net8.0\ref\KAMLMSBackend.dll
-C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSBackend\obj\Debug\net8.0\KAMLMSBackend.sourcelink.json

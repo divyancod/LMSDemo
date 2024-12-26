@@ -47,3 +47,10 @@ export interface StatusGroup {
 export interface LeadManagement {
     data: StatusGroup[];
 }
+
+export interface TimezoneInfo {
+  id: number;
+  country: string;
+  timeZoneAbbreviation: string;
+  utcOffset: string;
+}

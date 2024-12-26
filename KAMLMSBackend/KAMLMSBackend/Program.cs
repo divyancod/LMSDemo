@@ -1,5 +1,6 @@
 using KAMLMSBackend.Authentication;
 using KAMLMSRepository;
+using KAMLMSRepository.Helper;
 using KAMLMSRepository.Interfaces;
 using KAMLMSRepository.Repositories;
 using KAMLMSService.Interfaces;
@@ -26,6 +27,7 @@ builder.Services.AddScoped<JWTTokenHandler, JWTTokenHandler>();
 builder.Services.AddScoped<IDataControlService, DataControlService>();
 builder.Services.AddScoped<ICallManagementService, CallManagementService>();
 builder.Services.AddScoped<ICallManagementRepository, CallManagementRepository>();
+builder.Services.AddScoped<IDataControlRepository, DataControlRepository>();
 
 
 builder.Services.AddAuthentication(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme).
@@ -63,8 +65,16 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+    SqlFileExecutor executor = new SqlFileExecutor(dbContext);
+    executor.ExecutePendingSqls();
+}
+
+
+    // Configure the HTTP request pipeline.
+    if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();

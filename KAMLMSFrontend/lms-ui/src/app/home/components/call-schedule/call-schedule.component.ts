@@ -45,12 +45,15 @@ export class CallScheduleComponent implements OnInit {
       companyId : this.companyId,
       pocId : this.pocId,
       time:this.model.Time,
-      comment:this.model.Time
+      comment:this.model.Comment
     };
     this.leadService.scheduleCall(payload).subscribe(data=>{
-      console.log("data")
       this.activeModal.close();
     },error=>{})
+  }
+  cancel()
+  {
+    this.activeModal.close();
   }
 
 }

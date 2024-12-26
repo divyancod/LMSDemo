@@ -139,7 +139,12 @@ namespace KAMLMSRepository.Migrations
                         new
                         {
                             Id = 6,
-                            Status = "NotAnsered"
+                            Status = "NotAnswered"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Status = "Cancelled"
                         });
                 });
 
@@ -207,6 +212,13 @@ namespace KAMLMSRepository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("tbl_poc_custom_roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "DEFAULT"
+                        });
                 });
 
             modelBuilder.Entity("KAMLMSContracts.Entities.LeadStatusEntity", b =>

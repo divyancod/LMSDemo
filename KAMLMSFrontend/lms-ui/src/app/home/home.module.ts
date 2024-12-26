@@ -18,6 +18,7 @@ import { BackBtnDirective } from '../directive/back-btn.directive';
 import { CallScheduleComponent } from './components/call-schedule/call-schedule.component';
 import { CallScheduledListComponent } from './components/call-scheduled-list/call-scheduled-list.component';
 import { CallLogsListComponent } from './components/call-logs-list/call-logs-list.component';
+import { ModifyCallCardComponent } from './components/modify-call-card/modify-call-card.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { CallLogsListComponent } from './components/call-logs-list/call-logs-lis
     PocListComponent,
     CallScheduleComponent,
     CallScheduledListComponent,
-    CallLogsListComponent
+    CallLogsListComponent,
+    ModifyCallCardComponent
   ],
   imports: [
     CommonModule,

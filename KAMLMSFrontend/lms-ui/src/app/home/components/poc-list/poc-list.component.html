@@ -14,7 +14,6 @@
                             <th scope="col">Phone</th>
                             <th scope="col">Email</th>
                             <th scope="col">Role</th>
-                            <th scope="col">Last Contacted</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -25,7 +24,6 @@
                             <td>{{item.phone}}</td>
                             <td>{{item.email}}</td>
                             <td>{{item.role.name}} {{item.customRole.name}}</td>
-                            <td>{{item.updatedAt}}</td>
                             <td><button class="btn btn-dark btn-sm" (click)="openSchedule(item.id)">Schedule</button></td>
                         </tr>
                     </tbody>

@@ -5,5 +5,6 @@ namespace KAMLMSService.Interfaces
     public interface IDataControlService
     {
         IList<RolesEntity> getAllRoles();
+        IList<CountryEntity> getAllCountries();
     }
 }

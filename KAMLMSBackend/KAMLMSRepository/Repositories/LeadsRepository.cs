@@ -37,5 +37,12 @@ namespace KAMLMSRepository.Repositories
         {
             return databaseContext.LeadStatusEntity.ToList();
         }
+
+        public LeadsEntity UpdateLead(LeadsEntity entity)
+        {
+            databaseContext.Update(entity);
+            databaseContext.SaveChanges();
+            return entity;
+        }
     }
 }

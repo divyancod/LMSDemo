@@ -10,5 +10,6 @@ namespace KAMLMSRepository.Interfaces
         IList<LeadStatusEntity> GetLeadTypes();
         IList<LeadsEntity> GetLeads(int take, int page, int type);
         IList<DashboardResponse> GetDataForDashboard();
+        LeadsEntity UpdateLead(LeadsEntity leadsId);
     }
 }

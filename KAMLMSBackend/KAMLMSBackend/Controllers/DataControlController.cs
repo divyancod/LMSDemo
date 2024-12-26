@@ -21,5 +21,11 @@ namespace KAMLMSBackend.Controllers
         {
             return Ok(service.getAllRoles());
         }
+
+        [HttpGet("countries")]
+        public IActionResult getAllCountries()
+        {
+            return Ok(service.getAllCountries());
+        }
     }
 }

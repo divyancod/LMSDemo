@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TimezoneInfo } from 'src/app/models/LeadsModel';
 import { LeadsService } from 'src/app/service/leads.service';
 
 @Component({
@@ -12,17 +13,19 @@ export class AddLeadComponent implements OnInit {
   constructor(private leadsService: LeadsService,private router:Router) { }
 
   ngOnInit(): void {
+    this.loadCountries();
   }
   parentEnterpriseName: string = '';
   companyName: string = '';
   companyEmail: string = '';
   companyAddress: string = '';
-  country: string = '';
+  country: number = 0;
   timeZone: string = '';
   workingHourStart: string = '';
   workingHourEnd: string = '';
   comment: string = '';
   errorMessage: string = '';
+  timeZoneList : TimezoneInfo[] = []
 
   addLead() {
     if (!this.validate()) {
@@ -75,7 +78,7 @@ export class AddLeadComponent implements OnInit {
       return false;
     }
 
-    if (!this.country.trim()) {
+    if (this.country == 0) {
       this.errorMessage = "Country is required";
       return false;
     }
@@ -98,5 +101,17 @@ export class AddLeadComponent implements OnInit {
     return true;
   }
 
+  loadCountries()
+  {
+    this.leadsService.getAllCountryList().subscribe(data=>{
+      this.timeZoneList = data;
+    })
+  }
+
+  onCountryChange()
+  {
+    console.log(this.timeZoneList[this.country-1].utcOffset)
+    this.timeZone = this.timeZoneList[this.country-1].utcOffset
+  }
 
 }

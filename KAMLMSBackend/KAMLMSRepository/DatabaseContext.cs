@@ -20,6 +20,7 @@ namespace KAMLMSRepository
         public DbSet<CallScheduleEntity> CallScheduleEntity { get; set; }
         public DbSet<CallLogsEntity> CallLogsEntity { get; set; }
         public DbSet<CallStatusEntity> CallStatusEntity { get; set; }
+        public DbSet<CountryEntity> CountryEntity { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

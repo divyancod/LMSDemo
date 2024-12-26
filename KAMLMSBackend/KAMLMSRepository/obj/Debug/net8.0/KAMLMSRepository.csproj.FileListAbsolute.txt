@@ -1,3 +1,5 @@
+C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSRepository\bin\Debug\net8.0\Queries\country.sql
+C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSRepository\bin\Debug\net8.0\Queries\DashboardSP.sql
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSRepository\bin\Debug\net8.0\KAMLMSRepository.deps.json
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSRepository\bin\Debug\net8.0\KAMLMSRepository.runtimeconfig.json
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSRepository\bin\Debug\net8.0\KAMLMSRepository.dll
@@ -9,10 +11,10 @@ C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSRepository\obj\Deb
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSRepository\obj\Debug\net8.0\KAMLMSRepository.AssemblyInfoInputs.cache
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSRepository\obj\Debug\net8.0\KAMLMSRepository.AssemblyInfo.cs
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSRepository\obj\Debug\net8.0\KAMLMSRepository.csproj.CoreCompileInputs.cache
+C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSRepository\obj\Debug\net8.0\KAMLMSRepository.sourcelink.json
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSRepository\obj\Debug\net8.0\KAMLMSRepository.csproj.CopyComplete
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSRepository\obj\Debug\net8.0\KAMLMSRepository.dll
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSRepository\obj\Debug\net8.0\refint\KAMLMSRepository.dll
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSRepository\obj\Debug\net8.0\KAMLMSRepository.pdb
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSRepository\obj\Debug\net8.0\KAMLMSRepository.genruntimeconfig.cache
 C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSRepository\obj\Debug\net8.0\ref\KAMLMSRepository.dll
-C:\Users\Divyanshu_Verma\source\repos\KAM\KAMLMSBackend\KAMLMSRepository\obj\Debug\net8.0\KAMLMSRepository.sourcelink.json

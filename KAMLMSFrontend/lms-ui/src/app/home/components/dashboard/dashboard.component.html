@@ -1,4 +1,6 @@
-<app-header></app-header>
+<div>
+    <app-header></app-header>
+</div>
 <div>
     <div *ngFor="let item of homeLeads?.data" class="m-3">
         <app-leads-list [current]="item"></app-leads-list>
