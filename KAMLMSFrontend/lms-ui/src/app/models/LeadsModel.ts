@@ -15,6 +15,7 @@ export interface LeadInformation {
     assignedToId: string;
     createdAt: string;
     modifiedAt: string;
+    statusId:number;
   }
   
   export interface POCRoles
@@ -53,4 +54,10 @@ export interface TimezoneInfo {
   country: string;
   timeZoneAbbreviation: string;
   utcOffset: string;
+}
+
+export interface WorkingHours
+{
+  start:string | undefined;
+  end:string | undefined;
 }

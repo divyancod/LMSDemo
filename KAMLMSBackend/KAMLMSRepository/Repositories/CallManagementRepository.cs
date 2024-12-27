@@ -4,7 +4,9 @@ using Azure.Core;
 using KAMLMSContracts.Entities;
 using KAMLMSContracts.RequestModels;
 using KAMLMSContracts.ResponseModels;
+using KAMLMSRepository.Constants;
 using KAMLMSRepository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace KAMLMSRepository.Repositories
@@ -95,7 +97,7 @@ namespace KAMLMSRepository.Repositories
         public IList<FollowUpResponse> AtRisk()
         {
             var threeDayAgo = DateTime.Now.AddDays(-3);
-            var query = databaseContext.CallScheduleEntity.GroupBy(x => x.ScheduledForId).Where(x => x.Max(x => x.ScheduledAt) < threeDayAgo).Select((x => new FollowUpResponse
+            var query = databaseContext.CallScheduleEntity.Where(x => x.ScheduledFor.StatusId != 4).Where(x => x.ScheduledFor.StatusId != 5).GroupBy(x => x.ScheduledForId).Where(x => x.Max(x => x.ScheduledAt) < threeDayAgo).Select((x => new FollowUpResponse
             {
                 Name = x.FirstOrDefault().ScheduledFor.CompanyName,
                 FollowupDate = x.FirstOrDefault().ScheduledAt.ToString(),
@@ -103,6 +105,40 @@ namespace KAMLMSRepository.Repositories
                 CompanyId = x.FirstOrDefault().ScheduledFor.Id
             }));
             return query.ToList();
+        }
+        public IList<FollowUpResponse> MissedCalls()
+        {
+            var yesterday = DateTime.Now.AddDays(-1);
+            //var query = databaseContext.CallScheduleEntity.Where(x=>x.CallStatusId == (int)CallStatusEnum.Scheduled).GroupBy(x => x.ScheduledForId).Where(x => x.Max(x => x.ScheduledAt) < yesterday).Select((x => new FollowUpResponse
+            //{
+            //    Name = x.FirstOrDefault().ScheduledFor.CompanyName,
+            //    FollowupDate = x.FirstOrDefault().ScheduledAt.ToString(),
+            //    id = x.FirstOrDefault().CallScheduleId,
+            //    CompanyId = x.FirstOrDefault().ScheduledFor.Id
+            //}));
+
+            var today = DateTime.Now;
+            return databaseContext.CallScheduleEntity.Where(company => company.CallStatusId == (int)CallStatusEnum.Scheduled && company.ScheduledAt < today).Where(x=>x.ScheduledFor.StatusId!=4).Where(x => x.ScheduledFor.StatusId != 5)
+                            .Where(company => !databaseContext.CallScheduleEntity
+                                .Any(other => other.ScheduledForId == company.ScheduledById && other.ScheduledAt > today)).Select((x => new FollowUpResponse
+                                {
+                                    Name = x.ScheduledFor.CompanyName,
+                                    FollowupDate = x.ScheduledAt.ToString(),
+                                    id = x.CallScheduleId,
+                                    CompanyId = x.ScheduledFor.Id
+                                })).ToList();
+            //return query.ToList();
+        }
+
+        public void CancelAllCallsForLead(Guid id)
+        {
+            var calls = databaseContext.CallScheduleEntity.Where(x => x.ScheduledForId == id).Where(x=>x.CallStatusId== (int)CallStatusEnum.Scheduled).ToList();
+            foreach(var item in calls)
+            {
+                item.CallStatusId = (int)CallStatusEnum.Cancelled;
+                item.Comment = "Cancelled due to closing lead";
+            }
+            databaseContext.SaveChanges();
         }
     }
 }

@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row mt-2">
+        <h5>Are you sure?</h5>
+        <div class="col-12">
+            <p>{{isWon?wonMessage:lostMessage}}</p>
+            <div class="form-group">
+                <label for="companyAddress">Please provide comments*</label>
+                <textarea type="text" class="form-control" id="companyAddress" [(ngModel)]="comment"></textarea>
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+                {{errorMessage}}
+            </div>
+        </div>
+        <div class="col">
+            <button [className]="isWon?'btn btn-success m-2':'btn btn-dark m-2'" (click)="confirm()">Confirm</button>
+            <button class="btn btn-danger m-2" (click)="cancel()">Cancel</button>
+        </div>
+    </div>
+</div>

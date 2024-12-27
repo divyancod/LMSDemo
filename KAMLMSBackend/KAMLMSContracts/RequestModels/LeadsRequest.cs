@@ -13,4 +13,11 @@
 
         public string? Comment { get; set; }
     }
+
+    public class UpdateLead
+    {
+        public string id { get; set; }
+        public string status { get; set; }
+        public string comment { get; set; }
+    }
 }

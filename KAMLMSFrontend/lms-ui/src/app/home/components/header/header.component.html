@@ -6,6 +6,10 @@
                     <div class="card-body">
                         <h6>Quick Actions</h6>
                         <button type="button" class="btn btn-dark m-2" [routerLink]="'add'">Add Leads</button>
+                        <button type="button" class="btn btn-warning m-2">Today calls - 10000</button>
+                        <button type="button" class="btn btn-info m-2">New leads- 10000</button>
+                        <button type="button" class="btn btn-danger m-2">At risk leads- 10000</button>
+                        <button type="button" class="btn btn-success m-2">Follow Up required- 10000</button>
                     </div>
                 </div>
             </div>
@@ -25,7 +29,7 @@
                                 </tr>
                             </thead>
                             <tbody class="table-warning">
-                                <tr *ngFor="let item of followUpToday;let i=index">
+                                <tr *ngFor="let item of followUpToday;let i=index" [routerLink]="'/details/'+item.companyId">
                                     <th scope="row">{{i+1}}</th>
                                     <td>{{item.name}}</td>
                                     <td>{{formatToDdMmmYyyy(item.followupDate)}}</td>
@@ -53,7 +57,7 @@
                                 </tr>
                             </thead>
                             <tbody class="table-danger">
-                                <tr *ngFor="let item of atRiskLeads;let i=index">
+                                <tr *ngFor="let item of atRiskLeads;let i=index" [routerLink]="'/details/'+item.companyId">
                                     <th scope="row">{{i+1}}</th>
                                     <td>{{item.name}}</td>
                                     <td>{{formatToDdMmmYyyy(item.followupDate)}}</td>
@@ -81,7 +85,7 @@
                                 </tr>
                             </thead>
                             <tbody class="table-success">
-                                <tr *ngFor="let item of followUpCurrentMonth;let i=index">
+                                <tr *ngFor="let item of followUpCurrentMonth;let i=index" [routerLink]="'/details/'+item.companyId">
                                     <th scope="row">{{i+1}}</th>
                                     <td>{{item.name}}</td>
                                     <td>{{formatToDdMmmYyyy(item.followupDate)}}</td>

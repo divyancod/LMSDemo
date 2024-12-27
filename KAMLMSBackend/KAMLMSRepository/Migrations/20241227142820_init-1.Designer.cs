@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KAMLMSRepository.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20241226113358_init-1")]
+    [Migration("20241227142820_init-1")]
     partial class init1
     {
         /// <inheritdoc />
@@ -198,6 +198,31 @@ namespace KAMLMSRepository.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("tbl_poc_contacts");
+                });
+
+            modelBuilder.Entity("KAMLMSContracts.Entities.CountryEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TimeZoneAbbreviation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UtcOffset")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("tbl_country_time_zones");
                 });
 
             modelBuilder.Entity("KAMLMSContracts.Entities.CustomRoleEntity", b =>

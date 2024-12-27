@@ -14,5 +14,6 @@ namespace KAMLMSService.Interfaces
         void UpdateCallStatus(UpdateCallScheduleRequest request);
         IList<FollowUpResponse> GetFollowUpCallsList(string? day, string? month, string? year);
         IList<FollowUpResponse> AtRisk();
+        void CancelAllCallsForLead(string leadId);
     }
 }

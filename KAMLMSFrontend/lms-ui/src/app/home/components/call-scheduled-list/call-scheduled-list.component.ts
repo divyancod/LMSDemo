@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CallScheduledResponse, CallStatusModel, FilterCallStatusModel } from 'src/app/models/CallsModel';
 import { LeadsService } from 'src/app/service/leads.service';
 import { ModifyCallCardComponent } from '../modify-call-card/modify-call-card.component';
+import { WorkingHours } from 'src/app/models/LeadsModel';
 
 @Component({
   selector: 'app-call-scheduled-list',
@@ -12,10 +13,13 @@ import { ModifyCallCardComponent } from '../modify-call-card/modify-call-card.co
 export class CallScheduledListComponent implements OnInit {
 
   @Input("companyId") companyId: string = ''
+  @Input("workingHours")workingHours:WorkingHours = {end:'00:00',start:'00'}
   callScheduledList: CallScheduledResponse[] = []
   page: number = 0;
   callStatusFilter: FilterCallStatusModel[] = []
   showFilter:boolean = false;
+  disableNext:boolean = false;
+  
   constructor(private leadsService: LeadsService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
@@ -30,6 +34,11 @@ export class CallScheduledListComponent implements OnInit {
       filters=[];
     }
     this.leadsService.getCallScheduled(this.companyId, this.page, {statusList:filters}).subscribe(data => {
+      if(data.length==0 && this.callScheduledList.length!=0)
+      {
+        this.disableNext = true;
+        this.pageDown();
+      }
       this.callScheduledList = data;
       if(filters.length==0 && this.callStatusFilter.length!=0)
       {
@@ -58,6 +67,7 @@ export class CallScheduledListComponent implements OnInit {
     modelref.componentInstance.currentScheduleAt = currentDate;
     modelref.componentInstance.currentStatus = status;
     modelref.componentInstance.currentComment = comment
+    modelref.componentInstance.workingHours = this.workingHours
     modelref.result.then((result) => {
     },
       (reason) => {
@@ -90,5 +100,14 @@ export class CallScheduledListComponent implements OnInit {
   {
     this.page--;
     this.loadCallSchedule();
+  }
+
+  enableUpdateButton(id:number):boolean
+  {
+    if(id==1 || id==4)
+    {
+      return false;
+    }
+    return true;
   }
 }

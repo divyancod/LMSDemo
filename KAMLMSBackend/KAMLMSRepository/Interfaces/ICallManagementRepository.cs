@@ -15,5 +15,7 @@ namespace KAMLMSRepository.Interfaces
         CallScheduleEntity GetCallStatusById(int id);
         IList<FollowUpResponse> GetFollowUpCallsList(string day, string month, string year);
         IList<FollowUpResponse> AtRisk();
+        IList<FollowUpResponse> MissedCalls();
+        void CancelAllCallsForLead(Guid id);
     }
 }

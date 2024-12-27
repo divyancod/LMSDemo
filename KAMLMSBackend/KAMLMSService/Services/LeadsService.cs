@@ -11,9 +11,11 @@ namespace KAMLMSService.Services
     public class LeadsService : ILeadsService
     {
         private ILeadsRepository repository;
-        public LeadsService(ILeadsRepository leadsRepository)
+        private ICallManagementRepository callManagementRepository;
+        public LeadsService(ILeadsRepository leadsRepository, ICallManagementRepository callManagementRepository)
         {
             repository = leadsRepository;
+            this.callManagementRepository = callManagementRepository;
         }
         public Guid AddLeads(LeadsRequest leadsRequest, Guid UserId)
         {
@@ -81,7 +83,7 @@ namespace KAMLMSService.Services
             IList<LeadInfoResponse> response = new List<LeadInfoResponse>();
             foreach (var item in list)
             {
-                response.Add(new LeadInfoResponse { AssignedTo = item.AssignedTo.FullName, CompanyName = item.CompanyName, EnterpriseName = item.ParentEnterpriseName, Id = item.Id, Status = item.StatusId.ToString() });
+                response.Add(new LeadInfoResponse { AssignedTo = item.AssignedTo.FullName, CompanyName = item.CompanyName, EnterpriseName = item.ParentEnterpriseName, Id = item.Id, Status = item.status.Status ,StatusId=item.StatusId});
             }
             return response;
         }
@@ -121,6 +123,21 @@ namespace KAMLMSService.Services
         public LeadsEntity UpdateLead(LeadsEntity leadsId)
         {
             return repository.UpdateLead(leadsId);
+        }
+
+        public void UpdateLeadStatus(UpdateLead request)
+        {
+            LeadsEntity entity = repository.GetLead(new Guid(request.id));
+            entity.ModifiedAt = DateTime.Now;
+            entity.StatusId = int.Parse(request.status);
+            entity.Comment = request.comment;
+            UpdateLead(entity);
+            CancelAllCalls(request.id);
+        }
+
+        private void CancelAllCalls(string leadId)
+        {
+            callManagementRepository.CancelAllCallsForLead(new Guid(leadId));
         }
     }
 }

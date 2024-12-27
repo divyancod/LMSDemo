@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { LeadInformation, LeadManagement, LeadTypes, TimezoneInfo } from '../models/LeadsModel';
+import { LeadInformation, LeadManagement, LeadTypes, SingleLead, TimezoneInfo } from '../models/LeadsModel';
 import { POCDetails, PocDetailsMin } from '../models/POCModel';
 import { CallScheduledResponse, CallStatusModel } from '../models/CallsModel';
 import { FollowUpModel } from '../models/FollowUp';
@@ -70,5 +70,14 @@ export class LeadsService {
   getAllCountryList()
   {
     return this.httpClient.get<TimezoneInfo[]>(`${this.baseUrl}/data-control/countries`)
+  }
+
+  updateLead(payload:any)
+  {
+    return this.httpClient.patch(`${this.baseUrl}/leads/update-lead`,payload);
+  }
+
+  getLeadsByType(type: number, page: number) {
+    return this.httpClient.get<SingleLead[]>(`${this.baseUrl}/leads/get-leads-by-type?type=${type}&page=${page}`);
   }
 }

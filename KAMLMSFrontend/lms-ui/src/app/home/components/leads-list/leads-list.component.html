@@ -25,6 +25,7 @@
                         </tbody>
                     </table>
                     <p *ngIf="current?.leads?.length==0" class="d-flex justify-content-center">No data available for this section</p>
+                    <p class="d-flex justify-content-center" *ngIf="current?.leads?.length==5" style="margin: 0; padding: 0;" [routerLink]="'/leadslist/'+current?.id">Show all</p>
                 </div>
             </div>
         </div>

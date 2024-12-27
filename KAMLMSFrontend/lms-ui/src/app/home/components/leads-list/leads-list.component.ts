@@ -8,7 +8,6 @@ import { LeadTypes, SingleLead, StatusGroup } from 'src/app/models/LeadsModel';
 })
 export class LeadsListComponent implements OnInit {
 
-  numbers = Array(10).fill(0).map((_, i) => i + 1);
   @Input() current : StatusGroup | null = null
 
   constructor() { }

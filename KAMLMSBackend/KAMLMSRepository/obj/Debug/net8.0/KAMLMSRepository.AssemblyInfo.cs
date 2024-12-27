@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("KAMLMSRepository")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5a6a7f7ab8b5082a90c2560e7d557eae70ee104b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+49d667925495c17f68cd3cffd905ae19defb12a5")]
 [assembly: System.Reflection.AssemblyProductAttribute("KAMLMSRepository")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KAMLMSRepository")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

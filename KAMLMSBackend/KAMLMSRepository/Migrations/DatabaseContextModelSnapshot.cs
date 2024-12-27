@@ -197,6 +197,31 @@ namespace KAMLMSRepository.Migrations
                     b.ToTable("tbl_poc_contacts");
                 });
 
+            modelBuilder.Entity("KAMLMSContracts.Entities.CountryEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TimeZoneAbbreviation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UtcOffset")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("tbl_country_time_zones");
+                });
+
             modelBuilder.Entity("KAMLMSContracts.Entities.CustomRoleEntity", b =>
                 {
                     b.Property<int>("Id")

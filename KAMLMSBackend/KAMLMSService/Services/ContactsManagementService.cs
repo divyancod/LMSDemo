@@ -44,27 +44,28 @@ namespace KAMLMSService.Services
             entity = contactRepo.addContact(entity);
             if (request.IsMainPOC != null && request.IsMainPOC == true)
             {
-                ScheduleCallWithHotLeads(entity,user);
+                ScheduleCallWithHotLeads(entity,user,request.Time);
             }
         }
 
-        private void ScheduleCallWithHotLeads(ContactEntity entity, string user)
+        private void ScheduleCallWithHotLeads(ContactEntity entity, string user,string time)
         {
             //Scheduling introduction call
             CallScheduleRequest callSchedule = new CallScheduleRequest
             {
                 CompanyId = entity.LeadsId.ToString(),
                 PocId = entity.Id.ToString(),
-                Time = DateTime.Today.AddDays(1).ToString(),
+                Time = time,
                 Comment = "Introduction Call"
             };
             callManagementService.ScheduleCall(callSchedule, user);
             //Scheduling FollowUP Call
+            DateTime followUpDate = DateTime.Parse(time).AddDays(3);
             CallScheduleRequest callSchedule2 = new CallScheduleRequest
             {
                 CompanyId = entity.LeadsId.ToString(),
                 PocId = entity.Id.ToString(),
-                Time = DateTime.Today.AddDays(3).ToString(),
+                Time = followUpDate.ToString(),
                 Comment = "Follow up / Demo Call"
             };
             callManagementService.ScheduleCall(callSchedule2, user);

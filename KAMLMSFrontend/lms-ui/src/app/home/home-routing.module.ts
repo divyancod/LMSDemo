@@ -5,6 +5,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AddLeadComponent } from './components/add-lead/add-lead.component';
 import { AddPocComponent } from './components/add-poc/add-poc.component';
 import { LeadsInfoComponent } from './components/leads-info/leads-info.component';
+import { LeadListFullComponent } from './components/lead-list-full/lead-list-full.component';
 
 const routes: Routes = [{
   path: "", component: HomeComponent,
@@ -12,7 +13,8 @@ const routes: Routes = [{
     { path: "", component: DashboardComponent },
     { path:"add", component: AddLeadComponent},
     {path:"addpoc/:id",component:AddPocComponent},
-    {path:"details/:id",component:LeadsInfoComponent}
+    {path:"details/:id",component:LeadsInfoComponent},
+    {path:"leadslist/:type",component:LeadListFullComponent}
   ]
 }];
 

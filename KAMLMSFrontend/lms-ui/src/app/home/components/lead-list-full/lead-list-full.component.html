@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="row mt-2">
+        <div>
+            <button class="btn btn-dark m-2" appBackBtn>
+                Back
+            </button>
+        </div>
+        <div *ngIf="singleLead.length!=0">
+            <h5>{{singleLead[0].status}} Leads</h5>
+            <table class="table table-sm leads-table table-hover" *ngIf="singleLead?.length!=0">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Company name</th>
+                        <th scope="col">Enterprise Name</th>
+                        <th scope="col">Assigned To</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of singleLead; let i=index" [routerLink]="'/details/'+item.id">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{item.companyName}}</td>
+                        <td>{{item.enterpriseName}}</td>
+                        <td>{{item.assignedTo}}</td>
+                        <td>{{item.status}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-center" *ngIf="singleLead.length!=0">
+                <button class="btn btn-light btn-sm" *ngIf="page" (click)="pageDown()">Previous</button>
+                <button type="button" class="btn btn-light btn-sm" disabled>Showing {{singleLead.length}} from Page {{page+1}}</button>
+                <button class="btn btn-light btn-sm" *ngIf="singleLead.length==10 && !disableNext" (click)="pageUp()">Next</button>
+            </div>
+        </div>
+    </div>
+</div>

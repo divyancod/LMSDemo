@@ -40,7 +40,7 @@
                             <td>{{item.callStatusName}}</td>
                             <td>{{formatToDdMmmYyyy(item.scheduledAt)}}</td>
                             <td>{{item.comment}}</td>
-                            <td><button class="btn btn-dark btn-sm" [disabled]="item.callStatusId==3"
+                            <td><button class="btn btn-dark btn-sm" [disabled]="enableUpdateButton(item.callStatusId)"
                                     (click)="modifyCallSchedule(item.callScheduleId,item.callStatusName,item.scheduledAt,item.comment)">Update</button>
                             </td>
                         </tr>
@@ -49,10 +49,9 @@
                 <div class="d-flex justify-content-center" *ngIf="callScheduledList.length!=0">
                     <button class="btn btn-light btn-sm" *ngIf="page" (click)="pageDown()">Previous</button>
                     <button type="button" class="btn btn-light btn-sm" disabled>Showing {{callScheduledList.length}} from Page {{page+1}}</button>
-                    <button class="btn btn-light btn-sm" *ngIf="callScheduledList.length==10" (click)="pageUp()">Next</button>
+                    <button class="btn btn-light btn-sm" *ngIf="callScheduledList.length==10 && !disableNext" (click)="pageUp()">Next</button>
                 </div>
-                <p class="d-flex justify-content-center" *ngIf="callScheduledList.length==0">No POC available. Please
-                    add POC.</p>
+                <p class="d-flex justify-content-center" *ngIf="callScheduledList.length==0">No Calls Scheduled. Please schedule a call with lead.</p>
             </div>
         </div>
 

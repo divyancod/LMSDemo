@@ -8,6 +8,6 @@
         </div>
     </div>
 </div>
-<app-poc-list [companyId]="id" [companyName]="currentLead?.companyName" *ngIf="showPoc"></app-poc-list>
-<app-call-scheduled-list *ngIf="showCallSchedule" [companyId]="id"></app-call-scheduled-list>
+<app-poc-list [companyId]="id" [companyName]="currentLead?.companyName" *ngIf="showPoc" [workingHours]="getWorkingHours()"></app-poc-list>
+<app-call-scheduled-list *ngIf="showCallSchedule" [companyId]="id" [workingHours]="getWorkingHours()"></app-call-scheduled-list>
 <app-call-logs-list *ngIf="showCallLog"></app-call-logs-list>

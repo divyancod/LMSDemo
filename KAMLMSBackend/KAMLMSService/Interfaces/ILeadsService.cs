@@ -1,6 +1,7 @@
 ﻿using KAMLMSContracts.Entities;
 using KAMLMSContracts.RequestModels;
 using KAMLMSContracts.ResponseModels;
+using KAMLMSRepository.Constants;
 
 namespace KAMLMSService.Interfaces
 {
@@ -12,5 +13,6 @@ namespace KAMLMSService.Interfaces
         IList<LeadInfoResponse> GetLeads(int type,int skip, int take);
         DashboardResponseWithType GetLeadDashboard();
         LeadsEntity UpdateLead(LeadsEntity leadsId);
+        void UpdateLeadStatus(UpdateLead request);
     }
 }

@@ -18,12 +18,19 @@
             <div class="form-group">
                 <label for="time">Time</label>
                 <input type="datetime-local" id="time" class="form-control" [(ngModel)]="model.Time" name="time"
-                    [min]="minDateTime">
+                    [min]="minDateTime" (change)="validateTime()">
             </div>
 
             <div class="form-group">
                 <label for="comment">Comment</label>
                 <textarea id="comment" class="form-control" [(ngModel)]="model.Comment" name="comment"></textarea>
+            </div>
+            <div class="alert alert-danger mt-2" role="alert" *ngIf="errorMessage">
+                {{errorMessage}}
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="outsideWorkHour">
+                    <label class="form-check-label" for="inlineCheckbox1">Are you sure to schedule call outside work hours?</label>
+                </div>
             </div>
             <div class="d-flex">
                 <div class="m-2">

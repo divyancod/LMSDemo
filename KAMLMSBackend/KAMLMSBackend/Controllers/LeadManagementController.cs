@@ -1,6 +1,7 @@
 ﻿using KAMLMSBackend.Constants;
 using KAMLMSContracts.Entities;
 using KAMLMSContracts.RequestModels;
+using KAMLMSRepository.Constants;
 using KAMLMSService.Exceptions;
 using KAMLMSService.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -68,6 +69,19 @@ namespace KAMLMSBackend.Controllers
         {
             var response = leadsService.GetLeadDashboard();
             return Ok(response);
+        }
+
+        [HttpPatch("update-lead")]
+        public IActionResult updateLead(UpdateLead request)
+        {
+            leadsService.UpdateLeadStatus(request);
+            return Ok();
+        }
+
+        [HttpGet("get-leads-by-type")]
+        public IActionResult GetLeads([FromQuery]int type,[FromQuery] int page)
+        {
+            return Ok(leadsService.GetLeads(type,page,15));
         }
     }
 }

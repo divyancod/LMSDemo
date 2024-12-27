@@ -20,9 +20,10 @@ export class AddLeadComponent implements OnInit {
   companyEmail: string = '';
   companyAddress: string = '';
   country: number = 0;
+  selectedCountry=''
   timeZone: string = '';
-  workingHourStart: string = '';
-  workingHourEnd: string = '';
+  workingHourStart: string = '09:00';
+  workingHourEnd: string = '17:00';
   comment: string = '';
   errorMessage: string = '';
   timeZoneList : TimezoneInfo[] = []
@@ -31,12 +32,18 @@ export class AddLeadComponent implements OnInit {
     if (!this.validate()) {
       return;
     }
+    this.timeZoneList.forEach((item)=>{
+      if(item.id == this.country)
+      {
+        this.selectedCountry = item.country;
+      }
+    })
     this.leadsService.addLeads({
       parentEnterpriseName: this.parentEnterpriseName,
       companyName: this.companyName,
       companyEmail: this.companyEmail,
       companyAddress: this.companyAddress,
-      country: this.country,
+      country: this.selectedCountry,
       timeZone: this.timeZone,
       workingHourStart: this.workingHourStart,
       workingHourEnd: this.workingHourEnd,
@@ -54,7 +61,6 @@ export class AddLeadComponent implements OnInit {
 
   cancel() {
     console.log('Action canceled');
-    // Reset form or perform other cancel actions
   }
 
   validate(): boolean {
@@ -110,7 +116,6 @@ export class AddLeadComponent implements OnInit {
 
   onCountryChange()
   {
-    console.log(this.timeZoneList[this.country-1].utcOffset)
     this.timeZone = this.timeZoneList[this.country-1].utcOffset
   }
 

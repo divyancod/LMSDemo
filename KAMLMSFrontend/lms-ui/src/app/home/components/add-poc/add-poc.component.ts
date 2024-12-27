@@ -21,10 +21,13 @@ export class AddPocComponent implements OnInit {
   customRole: string = '';
   roles: POCRoles[] = [];
   showCustom: boolean = false
+  scheduleCall: boolean = false;
+  selectedTime: string = ''
+  minDateTime:string = ''
 
   errorMessage: string = '';
 
-  constructor(private route: ActivatedRoute, private leadsService: LeadsService, private dataService: DataControlService,private router:Router) {
+  constructor(private route: ActivatedRoute, private leadsService: LeadsService, private dataService: DataControlService, private router: Router) {
     this.route.params.subscribe(params => {
       this.id = params['id']
     });
@@ -32,15 +35,26 @@ export class AddPocComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadRoles();
+    const now = new Date();
+    const tomorrow = new Date(now);
+    tomorrow.setDate(now.getDate() + 1);
+    this.minDateTime = tomorrow.toISOString().slice(0, 16);
   }
   submitForm() {
-    if(!this.showCustom)
-    {
-      this.customRole=''
+    if (!this.showCustom) {
+      this.customRole = ''
     }
-    this.leadsService.addPOC({ companyId: this.id, name: this.name, phone: this.phone, email: this.email, roleId: this.roleId, customRole: this.customRole }).subscribe(data=>{
-      this.router.navigate(['details/'+this.id]);
-    },error=>{
+    if (this.scheduleCall && this.selectedTime == '') {
+      this.errorMessage = 'Select Schedule Call times.'
+      return;
+    }
+    if(!this.scheduleCall)
+    {
+      this.selectedTime = ''
+    }
+    this.leadsService.addPOC({ companyId: this.id, name: this.name, phone: this.phone, email: this.email, roleId: this.roleId, customRole: this.customRole, isMainPOC: this.scheduleCall, time: this.selectedTime }).subscribe(data => {
+      this.router.navigate(['details/' + this.id]);
+    }, error => {
 
     })
   }

@@ -43,6 +43,21 @@ namespace KAMLMSRepository.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "tbl_country_time_zones",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TimeZoneAbbreviation = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UtcOffset = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tbl_country_time_zones", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "tbl_kam_users",
                 columns: table => new
                 {
@@ -401,6 +416,9 @@ namespace KAMLMSRepository.Migrations
 
             migrationBuilder.DropTable(
                 name: "tbl_call_logs");
+
+            migrationBuilder.DropTable(
+                name: "tbl_country_time_zones");
 
             migrationBuilder.DropTable(
                 name: "tbl_master_login");

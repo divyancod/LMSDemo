@@ -19,6 +19,8 @@ import { CallScheduleComponent } from './components/call-schedule/call-schedule.
 import { CallScheduledListComponent } from './components/call-scheduled-list/call-scheduled-list.component';
 import { CallLogsListComponent } from './components/call-logs-list/call-logs-list.component';
 import { ModifyCallCardComponent } from './components/modify-call-card/modify-call-card.component';
+import { UpdateLeadComponent } from './components/update-lead/update-lead.component';
+import { LeadListFullComponent } from './components/lead-list-full/lead-list-full.component';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { ModifyCallCardComponent } from './components/modify-call-card/modify-ca
     CallScheduleComponent,
     CallScheduledListComponent,
     CallLogsListComponent,
-    ModifyCallCardComponent
+    ModifyCallCardComponent,
+    UpdateLeadComponent,
+    LeadListFullComponent
   ],
   imports: [
     CommonModule,

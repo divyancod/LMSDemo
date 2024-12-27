@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LeadInformation } from 'src/app/models/LeadsModel';
+import { LeadInformation, WorkingHours } from 'src/app/models/LeadsModel';
 import { LeadsService } from 'src/app/service/leads.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class LeadsInfoComponent implements OnInit {
   showCallSchedule: boolean = true;
   showPoc: boolean = false;
   showCallLog: boolean = false;
-  currentSelected:number = 1;
+  currentSelected: number = 1;
 
   constructor(private route: ActivatedRoute, private leadService: LeadsService) {
     this.route.params.subscribe(params => {
@@ -36,7 +36,7 @@ export class LeadsInfoComponent implements OnInit {
     })
   }
 
-  toggleVariable(variable:number) {
+  toggleVariable(variable: number) {
     this.showCallSchedule = this.showPoc = this.showCallLog = false;
     this.currentSelected = variable
 
@@ -47,5 +47,8 @@ export class LeadsInfoComponent implements OnInit {
     } else if (variable == 3) {
       this.showCallLog = true;
     }
+  }
+  getWorkingHours(): WorkingHours {
+    return { start: this.currentLead?.workingHourStart, end: this.currentLead?.workingHourEnd }
   }
 }
