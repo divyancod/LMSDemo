@@ -41,7 +41,7 @@ namespace KAMLMSRepository.Repositories
 
         public IList<PocMinResponse> getPocMin(Guid CompanyId)
         {
-            return databaseContext.ContactEntity.Select(x => new
+            return databaseContext.ContactEntity.Where(x=>x.LeadsId == CompanyId).Select(x => new
             PocMinResponse{
                 Id = x.Id,
                 PocName = x.Name

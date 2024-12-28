@@ -4,6 +4,7 @@ import { POCDetails } from 'src/app/models/POCModel';
 import { LeadsService } from 'src/app/service/leads.service';
 import { CallScheduleComponent } from '../call-schedule/call-schedule.component';
 import { WorkingHours } from 'src/app/models/LeadsModel';
+import { AddPocComponent } from '../add-poc/add-poc.component';
 
 @Component({
   selector: 'app-poc-list',
@@ -36,6 +37,17 @@ export class PocListComponent implements OnInit {
     modelref.componentInstance.companyName = this.companyName
     modelref.componentInstance.pocId = pocId
     modelref.componentInstance.workingHours = this.workingHours
+  }
+
+  addNewPoc()
+  {
+    const modelref = this.modalService.open(AddPocComponent)
+    modelref.componentInstance.id = this.companyId
+    modelref.result.then((result) => {
+      this.loadPOC();
+    },
+      (reason) => {
+      })
   }
 
 }

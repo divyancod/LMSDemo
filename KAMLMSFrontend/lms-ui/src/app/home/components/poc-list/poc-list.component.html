@@ -4,7 +4,7 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between">
                     <h5>Point of Contacts</h5>
-                    <button class="btn btn-success" [routerLink]="'/addpoc/'+companyId">Add new POC</button>
+                    <button class="btn btn-success" (click)="addNewPoc()">Add new POC</button>
                 </div>
                 <table class="table table-sm" *ngIf="pocList.length!=0">
                     <thead>

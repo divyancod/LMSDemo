@@ -18,7 +18,7 @@ namespace KAMLMSRepository
         public DbSet<LeadStatusEntity> LeadStatusEntity { get; set; }
         public DbSet<DashboardResponse> DashboardResponse { get; set; }
         public DbSet<CallScheduleEntity> CallScheduleEntity { get; set; }
-        public DbSet<CallLogsEntity> CallLogsEntity { get; set; }
+        //public DbSet<CallLogsEntity> CallLogsEntity { get; set; }
         public DbSet<CallStatusEntity> CallStatusEntity { get; set; }
         public DbSet<CountryEntity> CountryEntity { get; set; }
 

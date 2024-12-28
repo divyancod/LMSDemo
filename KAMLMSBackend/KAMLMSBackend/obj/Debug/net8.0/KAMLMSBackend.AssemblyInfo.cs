@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("KAMLMSBackend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+49d667925495c17f68cd3cffd905ae19defb12a5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2e8655d2f67f8c80f377a99e9f06f19caa456778")]
 [assembly: System.Reflection.AssemblyProductAttribute("KAMLMSBackend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KAMLMSBackend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TimezoneInfo } from 'src/app/models/LeadsModel';
 import { LeadsService } from 'src/app/service/leads.service';
+import { AddPocComponent } from '../add-poc/add-poc.component';
 
 @Component({
   selector: 'app-add-lead',
@@ -10,7 +12,7 @@ import { LeadsService } from 'src/app/service/leads.service';
 })
 export class AddLeadComponent implements OnInit {
 
-  constructor(private leadsService: LeadsService,private router:Router) { }
+  constructor(private leadsService: LeadsService,private router:Router,private ngbModal:NgbModal) { }
 
   ngOnInit(): void {
     this.loadCountries();
@@ -51,7 +53,19 @@ export class AddLeadComponent implements OnInit {
     }).subscribe(data => {
       if(data!=null)
       {
-        this.router.navigate([`/addpoc/${data}`])
+        let ngbModalOptions: NgbModalOptions = {
+          backdrop: 'static',
+          keyboard: false
+        };
+        const modelref = this.ngbModal.open(AddPocComponent, ngbModalOptions)
+        modelref.componentInstance.id = data
+        modelref.componentInstance.isNew = true;
+        modelref.result.then((result) => {
+          this.router.navigate(['']);
+        },
+          (reason) => {
+            this.router.navigate(['']);
+          })
       }
     },
       error => { 

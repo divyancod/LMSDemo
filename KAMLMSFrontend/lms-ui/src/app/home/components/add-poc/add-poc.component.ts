@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { LeadInformation, POCRoles } from 'src/app/models/LeadsModel';
 import { DataControlService } from 'src/app/service/data-control.service';
 import { LeadsService } from 'src/app/service/leads.service';
@@ -11,7 +12,8 @@ import { LeadsService } from 'src/app/service/leads.service';
 })
 export class AddPocComponent implements OnInit {
 
-  id: string = '';
+  @Input("id")id: string = '';
+  @Input("isNew")isNew:boolean = false
   //currentLead: LeadInformation | null = null;
 
   name: string = '';
@@ -27,10 +29,7 @@ export class AddPocComponent implements OnInit {
 
   errorMessage: string = '';
 
-  constructor(private route: ActivatedRoute, private leadsService: LeadsService, private dataService: DataControlService, private router: Router) {
-    this.route.params.subscribe(params => {
-      this.id = params['id']
-    });
+  constructor(private leadsService: LeadsService, private dataService: DataControlService, private router: Router,private activeModal:NgbActiveModal) {
   }
 
   ngOnInit(): void {
@@ -53,13 +52,14 @@ export class AddPocComponent implements OnInit {
       this.selectedTime = ''
     }
     this.leadsService.addPOC({ companyId: this.id, name: this.name, phone: this.phone, email: this.email, roleId: this.roleId, customRole: this.customRole, isMainPOC: this.scheduleCall, time: this.selectedTime }).subscribe(data => {
-      this.router.navigate(['details/' + this.id]);
+      this.activeModal.close();
     }, error => {
 
     })
   }
 
   loadRoles() {
+    console.log(this.id)
     this.dataService.getRoles().subscribe(data => {
       this.roles = data;
     }, error => {
@@ -69,5 +69,8 @@ export class AddPocComponent implements OnInit {
   onRoleChange() {
     this.showCustom = this.roleId == 11;
   }
-
+  cancel()
+  {
+    this.activeModal.dismiss();
+  }
 }

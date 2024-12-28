@@ -1,4 +1,5 @@
 ﻿using KAMLMSContracts.RequestModels;
+using KAMLMSContracts.ResponseModels;
 using KAMLMSService.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -31,7 +32,7 @@ namespace KAMLMSBackend.Controllers
         }
 
         [HttpPost("calls-by-companyid")]
-        public IActionResult getCallsByCompanyId([FromQuery]string companyId, [FromQuery]int page, [FromBody]CallFilters? filters)
+        public ActionResult<IList<CallScheduledResponse>> getCallsByCompanyId([FromQuery]string companyId, [FromQuery]int page, [FromBody]CallFilters? filters)
         {
             return Ok(callManagementService.GettAllCallScheduledByCompany(companyId,page, DEFAULT_TAKE,filters));
         }

@@ -35,7 +35,7 @@ namespace KAMLMSService.Services
                 Email = request.Email,
                 Phone = request.Phone,
                 RoleId = request.RoleId,
-                CustomRoleId = getCustomRole(request.RoleId, request.CustomRole),//todo add custom role
+                CustomRoleId = getCustomRole(request.RoleId, request.CustomRole),
                 AddedById = new Guid(user),
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now

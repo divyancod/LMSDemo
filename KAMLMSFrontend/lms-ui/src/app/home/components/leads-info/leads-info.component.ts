@@ -12,7 +12,7 @@ export class LeadsInfoComponent implements OnInit {
 
   id: string = ''
   currentLead: LeadInformation | null = null;
-  buttons: any[] = [{ id: 1, text: "Call Schedule History" }, { id: 2, text: "Point of contact" }, { id: 3, text: "Call Logs" }]
+  buttons: any[] = [{ id: 1, text: "Call Schedule History" }, { id: 2, text: "Point of contact" }]
   showCallSchedule: boolean = true;
   showPoc: boolean = false;
   showCallLog: boolean = false;
