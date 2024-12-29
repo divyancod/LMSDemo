@@ -38,11 +38,9 @@ namespace KAMLMSRepository.Repositories
             var query = databaseContext.CallScheduleEntity
                             .OrderByDescending(cs => cs.ScheduledAt)
                             .Where(x => x.ScheduledForId == companyId);
-            if (filter != null && filter.statusList != null && filter.statusList.Length != 0)
+            if (filter != null && filter.statusList != null)
             {
-                int[] statusArray = filter.statusList.Select(s => int.Parse(s)).ToArray();
-
-                query = query.Where(x => statusArray.Contains(x.CallStatusId));
+                query = query.Where(x => filter.statusList.Contains(x.CallStatusId));
             }
 
             var result = query.Select(cs => new CallScheduledResponse

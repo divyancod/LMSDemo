@@ -1,6 +1,5 @@
 ﻿using KAMLMSContracts.Entities;
 using KAMLMSContracts.RequestModels;
-using KAMLMSContracts.ResponseModels;
 using KAMLMSRepository.Interfaces;
 using KAMLMSService.Interfaces;
 

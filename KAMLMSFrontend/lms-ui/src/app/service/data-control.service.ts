@@ -13,6 +13,6 @@ export class DataControlService {
   constructor(private http: HttpClient) { }
 
   getRoles() {
-    return this.http.get<POCRoles[]>(`${this.baseUrl}/data-control/roles`);
+    return this.http.get<POCRoles[]>(`${this.baseUrl}/reference-data/roles`);
   }
 }

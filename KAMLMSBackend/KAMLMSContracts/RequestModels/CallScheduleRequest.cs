@@ -30,6 +30,6 @@
         /// <summary>
         /// Requested status of the call which is demanded by the UI 
         /// </summary>
-        public string[]? statusList { get; set; }
+        public List<int>? statusList { get; set; }
     }
 }

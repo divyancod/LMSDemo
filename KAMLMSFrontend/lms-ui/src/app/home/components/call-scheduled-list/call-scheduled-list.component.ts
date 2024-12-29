@@ -13,13 +13,13 @@ import { WorkingHours } from 'src/app/models/LeadsModel';
 export class CallScheduledListComponent implements OnInit {
 
   @Input("companyId") companyId: string = ''
-  @Input("workingHours")workingHours:WorkingHours = {end:'00:00',start:'00'}
+  @Input("workingHours") workingHours: WorkingHours = { end: '00:00', start: '00' }
   callScheduledList: CallScheduledResponse[] = []
   page: number = 0;
   callStatusFilter: FilterCallStatusModel[] = []
-  showFilter:boolean = false;
-  disableNext:boolean = false;
-  
+  showFilter: boolean = false;
+  disableNext: boolean = false;
+
   constructor(private leadsService: LeadsService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
@@ -28,22 +28,24 @@ export class CallScheduledListComponent implements OnInit {
   }
 
   loadCallSchedule() {
-    var filters = this.callStatusFilter.filter(x=>x.isSelected).map(x=>x.callStatusModel.id.toString());
-    if(filters.length==this.callStatusFilter.length)
-    {
-      filters=[];
+    var filters = this.callStatusFilter.filter(x => x.isSelected).map(x => x.callStatusModel.id);
+    if (filters.length == this.callStatusFilter.length) {
+      filters = [];
     }
-    this.leadsService.getCallScheduled(this.companyId, this.page, {statusList:filters}).subscribe(data => {
-      if(data.length==0 && this.callScheduledList.length!=0)
-      {
-        this.disableNext = true;
-        this.pageDown();
-      }
+    this.leadsService.getCallScheduled(this.companyId, this.page, filters).subscribe(data => {
+      // if(data.length==0 && this.callScheduledList.length!=0)
+      // {
+      //   this.disableNext = true;
+      //   this.pageDown();
+      // }
       this.callScheduledList = data;
-      if(filters.length==0 && this.callStatusFilter.length!=0)
+      if(this.callStatusFilter.length==0 && this.callScheduledList.length!=0)
       {
-        this.callStatusFilter.forEach(item=>{
-          item.isSelected=true;
+        this.loadCallStatuses();//todo reduce this extra call
+      }
+      if (filters.length == 0 && this.callStatusFilter.length != 0) {
+        this.callStatusFilter.forEach(item => {
+          item.isSelected = true;
         })
       }
     }, error => {
@@ -61,7 +63,7 @@ export class CallScheduledListComponent implements OnInit {
 
     return date.toLocaleDateString('en-US', options).replace(',', '');
   }
-  modifyCallSchedule(callId: string, status: string, currentDate: string,comment:string|null) {
+  modifyCallSchedule(callId: string, status: string, currentDate: string, comment: string | null) {
     const modelref = this.modalService.open(ModifyCallCardComponent);
     modelref.componentInstance.callId = callId;
     modelref.componentInstance.currentScheduleAt = currentDate;
@@ -81,31 +83,25 @@ export class CallScheduledListComponent implements OnInit {
     })
   }
 
-  toggleFilter()
-  {
+  toggleFilter() {
     this.showFilter = !this.showFilter
   }
-  applyFilters()
-  {
+  applyFilters() {
     this.loadCallSchedule();
   }
 
-  pageUp()
-  {
+  pageUp() {
     this.page++;
     this.loadCallSchedule();
   }
 
-  pageDown()
-  {
+  pageDown() {
     this.page--;
     this.loadCallSchedule();
   }
 
-  enableUpdateButton(id:number):boolean
-  {
-    if(id==1 || id==4)
-    {
+  enableUpdateButton(id: number): boolean {
+    if (id == 1 || id == 4) {
       return false;
     }
     return true;

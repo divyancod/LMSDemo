@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("KAMLMSService")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2e8655d2f67f8c80f377a99e9f06f19caa456778")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5f56f772f5c939c6032b884c06a9538ec8b66aae")]
 [assembly: System.Reflection.AssemblyProductAttribute("KAMLMSService")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KAMLMSService")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
