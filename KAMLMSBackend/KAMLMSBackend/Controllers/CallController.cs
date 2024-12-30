@@ -1,10 +1,12 @@
 ﻿using KAMLMSContracts.RequestModels;
 using KAMLMSContracts.ResponseModels;
 using KAMLMSService.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KAMLMSBackend.Controllers
 {
+    [Authorize]
     [Route("api/calls")]
     [ApiController]
     public class CallController : ControllerBase
@@ -17,7 +19,7 @@ namespace KAMLMSBackend.Controllers
         }
 
         [HttpPost]
-        public ActionResult createCall(CallScheduleRequest request)
+        public ActionResult<int> createCall(CallScheduleRequest request)
         {
             try
             {
@@ -28,23 +30,6 @@ namespace KAMLMSBackend.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
-        //[HttpGet]
-        //public ActionResult GetCalls([FromQuery] string? companyId, [FromQuery] string? pocId, [FromQuery] int? status, [FromQuery] int page, [FromQuery] int pageSize)
-        //{
-
-        //    if(companyId==null && pocId==null)
-        //    {
-        //        return BadRequest("Either company id or poc id is required.");
-        //    }
-        //    return Ok();
-        //}
-
-        //[HttpGet("{id}")]
-        //public ActionResult GetCallById(Guid id)
-        //{
-        //    return Ok();
-        //}
 
         [HttpPatch]
         public IActionResult updateCallStatus(UpdateCallScheduleRequest request)
@@ -66,11 +51,5 @@ namespace KAMLMSBackend.Controllers
             CallFilters filters = new CallFilters { statusList = statuses };
             return Ok(callManagementService.GettAllCallScheduledByCompany(companyId, page, DEFAULT_TAKE, filters));
         }
-
-        //[HttpGet("by-poc/{pocid}")]
-        //public IActionResult getCallsByPocyId(string pocid)
-        //{
-        //    return Ok(callManagementService.GetAllCallScheduledByPOC(pocid));
-        //}
     }
 }

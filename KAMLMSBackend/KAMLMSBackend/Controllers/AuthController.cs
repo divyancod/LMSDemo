@@ -55,11 +55,11 @@ namespace KAMLMSBackend.Controllers
                     Token = jWTTokenHandler.GenerateToken(user.Email, user.Id)
                 };
                 return Ok(response);
-        }
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
-    }
-}
+            }
+        }
     }
 }

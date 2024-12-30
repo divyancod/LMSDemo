@@ -1,12 +1,15 @@
 ﻿using KAMLMSBackend.Constants;
 using KAMLMSContracts.Entities;
 using KAMLMSContracts.RequestModels;
+using KAMLMSContracts.ResponseModels;
 using KAMLMSService.Exceptions;
 using KAMLMSService.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KAMLMSBackend.Controllers
 {
+    [Authorize]
     [Route("api/leads")]
     [ApiController]
     public class LeadsController : ControllerBase
@@ -20,7 +23,7 @@ namespace KAMLMSBackend.Controllers
         }
 
         [HttpGet("{leadId:guid}")]
-        public IActionResult Get(string leadId)
+        public ActionResult<LeadsEntity> Get(string leadId)
         {
             LeadsEntity resposne = leadsService.GetLead(new Guid(leadId));
             if (resposne == null)
@@ -31,7 +34,7 @@ namespace KAMLMSBackend.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddLead(LeadsRequest request)
+        public ActionResult<Guid> AddLead(LeadsRequest request)
         {
             Guid id;
             try
@@ -50,14 +53,14 @@ namespace KAMLMSBackend.Controllers
         }
 
         [HttpPatch]
-        public IActionResult updateLead(UpdateLead request)
+        public ActionResult updateLead(UpdateLead request)
         {
             leadsService.UpdateLeadStatus(request);
             return Ok();
         }
 
         [HttpGet("{leadType:int}")]
-        public IActionResult GetLeads(int leadType, [FromQuery] int page)
+        public ActionResult<IList<LeadInfoResponse>> GetLeads(int leadType, [FromQuery] int page)
         {
             return Ok(leadsService.GetLeads(leadType, page, PAGE_DEFAULT));
         }

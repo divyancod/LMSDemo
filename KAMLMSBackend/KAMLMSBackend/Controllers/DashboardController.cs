@@ -1,9 +1,11 @@
 ﻿using KAMLMSContracts.ResponseModels;
 using KAMLMSService.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KAMLMSBackend.Controllers
 {
+    [Authorize]
     [Route("api/dashboard")]
     [ApiController]
     public class DashboardController : ControllerBase

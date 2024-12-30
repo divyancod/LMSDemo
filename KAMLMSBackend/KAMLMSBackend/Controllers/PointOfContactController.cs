@@ -1,4 +1,5 @@
-﻿using KAMLMSContracts.RequestModels;
+﻿using KAMLMSContracts.Entities;
+using KAMLMSContracts.RequestModels;
 using KAMLMSService.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +34,7 @@ namespace KAMLMSBackend.Controllers
         }
 
         [HttpGet("{companyId}")]
-        public IActionResult getPOCs(string companyId, bool withLessData = false)
+        public ActionResult<IList<ContactEntity>> getPOCs(string companyId, bool withLessData = false)
         {
             if(withLessData)
             {

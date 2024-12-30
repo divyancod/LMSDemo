@@ -22,31 +22,6 @@ namespace KAMLMSRepository.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("KAMLMSContracts.Entities.CallLogsEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CallScheduleId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CallScheduleId");
-
-                    b.ToTable("tbl_call_logs");
-                });
-
             modelBuilder.Entity("KAMLMSContracts.Entities.CallScheduleEntity", b =>
                 {
                     b.Property<int>("CallScheduleId")
@@ -522,17 +497,6 @@ namespace KAMLMSRepository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DashboardResponse");
-                });
-
-            modelBuilder.Entity("KAMLMSContracts.Entities.CallLogsEntity", b =>
-                {
-                    b.HasOne("KAMLMSContracts.Entities.CallScheduleEntity", "CallSchedule")
-                        .WithMany()
-                        .HasForeignKey("CallScheduleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CallSchedule");
                 });
 
             modelBuilder.Entity("KAMLMSContracts.Entities.CallScheduleEntity", b =>

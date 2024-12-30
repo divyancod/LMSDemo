@@ -1,10 +1,11 @@
 ﻿using KAMLMSContracts.Entities;
 using KAMLMSService.Interfaces;
-using KAMLMSService.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KAMLMSBackend.Controllers
 {
+    [Authorize]
     [Route("api/reference-data")]
     [ApiController]
     public class ReferenceDataController : ControllerBase
