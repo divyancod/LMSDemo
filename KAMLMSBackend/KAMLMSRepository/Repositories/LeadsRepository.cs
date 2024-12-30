@@ -44,5 +44,21 @@ namespace KAMLMSRepository.Repositories
             databaseContext.SaveChanges();
             return entity;
         }
+
+        public void SyncLead()
+        {
+            //DEFAULT SYNCING
+           try
+            {
+                var lastDate = DateTime.Now;
+                lastDate = lastDate.AddDays(-10);
+                string sql = "UPDATE tbl_leads_information SET StatusId=3 WHERE Id IN (SELECT ScheduledForId FROM tbl_call_schedule_history WHERE ScheduledAt<{0} GROUP BY ScheduledForId) AND StatusId<>4 AND StatusId<>5";
+                databaseContext.Database.ExecuteSqlRaw(sql, lastDate);
+            }
+            catch
+            {
+
+            }
+        }
     }
 }

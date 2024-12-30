@@ -12,8 +12,8 @@ namespace KAMLMSService.Interfaces
         IList<CallScheduleEntity> GetAllCallScheduledByStatus(int status);
         IList<CallStatusEntity> GetAllCallStatusDetails();
         void UpdateCallStatus(UpdateCallScheduleRequest request);
-        IList<FollowUpResponse> GetFollowUpCallsList(string? day, string? month, string? year);
-        IList<FollowUpResponse> AtRisk();
+        IList<FollowUpResponse> GetFollowUpCallsList(string? day, string? month, string? year,int page, int take);
+        IList<FollowUpResponse> AtRisk(int page, int take);
         void CancelAllCallsForLead(string leadId);
     }
 }

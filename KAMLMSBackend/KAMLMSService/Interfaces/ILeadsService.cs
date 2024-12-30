@@ -14,5 +14,6 @@ namespace KAMLMSService.Interfaces
         DashboardResponseWithType GetLeadDashboard();
         LeadsEntity UpdateLead(LeadsEntity leadsId);
         void UpdateLeadStatus(UpdateLead request);
+        void SyncLeadsToPlace();
     }
 }

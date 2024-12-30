@@ -62,11 +62,11 @@ export class LeadsService {
 
   //----
   getFollowUpList(day: string, month: string, year: string) {
-    return this.httpClient.get<FollowUpModel[]>(`${this.baseUrl}/dashboard/by-followups?day=${day}&month=${month}&year=${year}`);
+    return this.httpClient.get<FollowUpModel[]>(`${this.baseUrl}/dashboard/by-followups?day=${day}&month=${month}&year=${year}&page=0&take=5`);
   }
   getAtRiskLeads()
   {
-    return this.httpClient.get<FollowUpModel[]>(`${this.baseUrl}/dashboard/by-risk`);
+    return this.httpClient.get<FollowUpModel[]>(`${this.baseUrl}/dashboard/by-risk?page=0&take=5`);
   }
 
   getAllCountryList()

@@ -61,5 +61,13 @@ namespace KAMLMSBackend.Controllers
         {
             return Ok(leadsService.GetLeads(leadType, page, PAGE_DEFAULT));
         }
+
+        [HttpGet("sync-lead")]
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public IActionResult syncLeads()
+        {
+            leadsService.SyncLeadsToPlace();
+            return Ok();
+        }
     }
 }

@@ -32,11 +32,11 @@ namespace KAMLMSBackend.Controllers
         }
 
         [HttpGet("by-followups")]
-        public ActionResult<IList<FollowUpResponse>> getFollowupForDashboard(string? day, string? month, string? year)
+        public ActionResult<IList<FollowUpResponse>> getFollowupForDashboard(string? day, string? month, string? year,int page, int take)
         {
             try
             {
-                return Ok(_callManagementService.GetFollowUpCallsList(day, month, year));
+                return Ok(_callManagementService.GetFollowUpCallsList(day, month, year,page, take));
             }
             catch (Exception ex)
             {
@@ -45,11 +45,11 @@ namespace KAMLMSBackend.Controllers
         }
 
         [HttpGet("by-risk")]
-        public ActionResult<IList<FollowUpResponse>> getAtRiskLeadsForDashboard()
+        public ActionResult<IList<FollowUpResponse>> getAtRiskLeadsForDashboard(int page, int take)
         {
             try
             {
-                return Ok(_callManagementService.AtRisk());
+                return Ok(_callManagementService.AtRisk(page, take));
             }
             catch (Exception ex)
             {

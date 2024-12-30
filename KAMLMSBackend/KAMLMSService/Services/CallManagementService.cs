@@ -88,7 +88,7 @@ namespace KAMLMSService.Services
             callManagementRepository.UpdateCallStatus(entity);
         }
 
-        public IList<FollowUpResponse> GetFollowUpCallsList(string? day, string? month, string? year)
+        public IList<FollowUpResponse> GetFollowUpCallsList(string? day, string? month, string? year, int page, int take)
         {
             DateTime today = DateTime.Now;
             if(day==null)
@@ -103,13 +103,14 @@ namespace KAMLMSService.Services
             {
                 year = today.Year.ToString();
             }
-            return callManagementRepository.GetFollowUpCallsList(day, month, year);
+            return callManagementRepository.GetFollowUpCallsList(day, month, year,page, take);
         }
 
-        public IList<FollowUpResponse> AtRisk()
+        public IList<FollowUpResponse> AtRisk(int page, int take)
         {
-            var oldFolloups = callManagementRepository.AtRisk(); //get leads who are not contacted for last 10 days
-            var missed = callManagementRepository.MissedCalls(); // get missed scheduled calls
+            var oldFolloups = callManagementRepository.AtRisk(page,take); //get leads who are not contacted for last 10 days
+            var missed = callManagementRepository.MissedCalls(page, take - oldFolloups.Count); // get missed scheduled calls
+            
             IList<FollowUpResponse> response = new List<FollowUpResponse>();
             IList<Guid> tracking = new List<Guid>();
             //add old and compare missed to add in list

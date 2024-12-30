@@ -75,7 +75,7 @@ namespace KAMLMSRepository.Repositories
             return databaseContext.CallScheduleEntity.FirstOrDefault(x => x.CallScheduleId == id);
         }
 
-        public IList<FollowUpResponse> GetFollowUpCallsList(string day, string month, string year)
+        public IList<FollowUpResponse> GetFollowUpCallsList(string day, string month, string year,int page, int take)
         {
             var query = databaseContext.CallScheduleEntity.OrderBy(cs => cs.ScheduledAt).Where(x => x.CallStatusId == 1);
             if (day != null)
@@ -83,16 +83,17 @@ namespace KAMLMSRepository.Repositories
                 query = query.Where(x => x.ScheduledAt.Day.ToString() == day);
             }
             query = query.Where(x => x.ScheduledAt.Month.ToString() == month).Where(x => x.ScheduledAt.Year.ToString() == year);
-            var result = query.Select(x => new FollowUpResponse
+            var result = query.GroupBy(x=>x.ScheduledForId).Select(x => new FollowUpResponse
             {
-                Name = x.ScheduledFor.CompanyName,
-                FollowupDate = x.ScheduledAt.ToString(),
-                id = x.CallScheduleId,
-                CompanyId = x.ScheduledFor.Id
-            }).Take(5).ToList();
+                Name = x.FirstOrDefault().ScheduledFor.CompanyName,
+                FollowupDate = x.FirstOrDefault().ScheduledAt.ToString(),
+                id = x.FirstOrDefault().CallScheduleId,
+                CompanyId = x.FirstOrDefault().ScheduledFor.Id
+            }).Skip(page * take).Take(take).ToList();
             return result;
         }
-        public IList<FollowUpResponse> AtRisk()
+
+        public IList<FollowUpResponse> AtRisk(int page, int take)
         {
             var threeDayAgo = DateTime.Now.AddDays(-3);
             var query = databaseContext.CallScheduleEntity.Where(x => x.ScheduledFor.StatusId != 4).Where(x => x.ScheduledFor.StatusId != 5).GroupBy(x => x.ScheduledForId).Where(x => x.Max(x => x.ScheduledAt) < threeDayAgo).Select((x => new FollowUpResponse
@@ -101,11 +102,15 @@ namespace KAMLMSRepository.Repositories
                 FollowupDate = x.FirstOrDefault().ScheduledAt.ToString(),
                 id = x.FirstOrDefault().CallScheduleId,
                 CompanyId = x.FirstOrDefault().ScheduledFor.Id
-            }));
+            })).Skip(page * take).Take(take);
             return query.ToList();
         }
-        public IList<FollowUpResponse> MissedCalls()
+        public IList<FollowUpResponse> MissedCalls(int page, int take)
         {
+            if(take==0)
+            {
+                return new List<FollowUpResponse>(); // empty list
+            }
             var yesterday = DateTime.Now.AddDays(-1);
             //var query = databaseContext.CallScheduleEntity.Where(x=>x.CallStatusId == (int)CallStatusEnum.Scheduled).GroupBy(x => x.ScheduledForId).Where(x => x.Max(x => x.ScheduledAt) < yesterday).Select((x => new FollowUpResponse
             //{
@@ -118,13 +123,13 @@ namespace KAMLMSRepository.Repositories
             var today = DateTime.Now;
             return databaseContext.CallScheduleEntity.Where(company => company.CallStatusId == (int)CallStatusEnum.Scheduled && company.ScheduledAt < today).Where(x=>x.ScheduledFor.StatusId!=4).Where(x => x.ScheduledFor.StatusId != 5)
                             .Where(company => !databaseContext.CallScheduleEntity
-                                .Any(other => other.ScheduledForId == company.ScheduledById && other.ScheduledAt > today)).Select((x => new FollowUpResponse
+                                .Any(other => other.ScheduledForId == company.ScheduledById && other.ScheduledAt > today)).GroupBy(x=>x.ScheduledForId).Select((x => new FollowUpResponse
                                 {
-                                    Name = x.ScheduledFor.CompanyName,
-                                    FollowupDate = x.ScheduledAt.ToString(),
-                                    id = x.CallScheduleId,
-                                    CompanyId = x.ScheduledFor.Id
-                                })).ToList();
+                                    Name = x.FirstOrDefault().ScheduledFor.CompanyName,
+                                    FollowupDate = x.FirstOrDefault().ScheduledAt.ToString(),
+                                    id = x.FirstOrDefault().CallScheduleId,
+                                    CompanyId = x.FirstOrDefault().ScheduledFor.Id
+                                })).Skip(page* take).Take(take).ToList();
             //return query.ToList();
         }
 

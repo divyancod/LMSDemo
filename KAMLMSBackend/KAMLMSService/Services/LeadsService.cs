@@ -139,5 +139,10 @@ namespace KAMLMSService.Services
         {
             callManagementRepository.CancelAllCallsForLead(new Guid(leadId));
         }
+
+        public void SyncLeadsToPlace()
+        {
+            repository.SyncLead();
+        }
     }
 }
