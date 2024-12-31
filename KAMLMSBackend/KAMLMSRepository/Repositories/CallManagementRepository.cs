@@ -112,14 +112,6 @@ namespace KAMLMSRepository.Repositories
                 return new List<FollowUpResponse>(); // empty list
             }
             var yesterday = DateTime.Now.AddDays(-1);
-            //var query = databaseContext.CallScheduleEntity.Where(x=>x.CallStatusId == (int)CallStatusEnum.Scheduled).GroupBy(x => x.ScheduledForId).Where(x => x.Max(x => x.ScheduledAt) < yesterday).Select((x => new FollowUpResponse
-            //{
-            //    Name = x.FirstOrDefault().ScheduledFor.CompanyName,
-            //    FollowupDate = x.FirstOrDefault().ScheduledAt.ToString(),
-            //    id = x.FirstOrDefault().CallScheduleId,
-            //    CompanyId = x.FirstOrDefault().ScheduledFor.Id
-            //}));
-
             var today = DateTime.Now;
             return databaseContext.CallScheduleEntity.Where(company => company.CallStatusId == (int)CallStatusEnum.Scheduled && company.ScheduledAt < today).Where(x=>x.ScheduledFor.StatusId!=4).Where(x => x.ScheduledFor.StatusId != 5)
                             .Where(company => !databaseContext.CallScheduleEntity
@@ -141,6 +133,12 @@ namespace KAMLMSRepository.Repositories
                 item.CallStatusId = (int)CallStatusEnum.Cancelled;
                 item.Comment = "Cancelled due to closing lead";
             }
+            databaseContext.SaveChanges();
+        }
+
+        public void AddCallList(IList<CallScheduleEntity> request)
+        {
+            databaseContext.CallScheduleEntity.AddRange(request);
             databaseContext.SaveChanges();
         }
     }

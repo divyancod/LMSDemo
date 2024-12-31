@@ -21,6 +21,10 @@
         /// Any addition comment or reason for the call? (Followup, introducation)
         /// </summary>
         public string? Comment { get; set; }
+        /// <summary>
+        /// call frequency
+        /// </summary>
+        public int CallFrequency { get; set; }
     }
     /// <summary>
     /// This is for list call schuedle list with the filters

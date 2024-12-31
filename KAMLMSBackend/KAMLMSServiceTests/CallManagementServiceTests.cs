@@ -95,7 +95,7 @@ namespace KAMLMSServiceTests
             callManagementService.ScheduleCall(request, userId);
 
             // Assert
-            callManagementRepositoryMock.Verify(repo => repo.ScheduleCall(It.IsAny<CallScheduleEntity>()), Times.Once);
+            callManagementRepositoryMock.Verify(repo => repo.AddCallList(It.IsAny<IList<CallScheduleEntity>>()), Times.Once);
             leadsServiceMock.Verify(service => service.UpdateLead(It.IsAny<LeadsEntity>()), Times.Once);
         }
 
@@ -136,7 +136,7 @@ namespace KAMLMSServiceTests
 
             // Assert
             callManagementRepositoryMock.Verify(repo => repo.UpdateCallStatus(It.IsAny<CallScheduleEntity>()), Times.Once);
-            callManagementRepositoryMock.Verify(repo => repo.ScheduleCall(It.IsAny<CallScheduleEntity>()), Times.Once);
+            callManagementRepositoryMock.Verify(repo => repo.AddCallList(It.IsAny<IList<CallScheduleEntity>>()), Times.Once);
         }
 
         [Test]

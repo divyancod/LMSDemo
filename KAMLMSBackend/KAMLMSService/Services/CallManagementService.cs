@@ -52,19 +52,43 @@ namespace KAMLMSService.Services
             {
                 throw new CustomException("Invalid POC ID");
             }
-            CallScheduleEntity entity = new CallScheduleEntity
+            int callFrequency = 1;
+            int callGap = 1;
+
+            if (request.CallFrequency==1)//daily
             {
-                ScheduledForId = new Guid(request.CompanyId),
-                ScheduledWithId = new Guid(request.PocId),
-                ScheduledById = new Guid(currentUser),
-                CallerId = new Guid(currentUser),
-                ScheduledAt = DateTime.Parse(request.Time),
-                Comment = string.IsNullOrEmpty(request.Comment) ? "NEW Call" : request.Comment,
-                CreatedAt = DateTime.Now,
-                CallStatusId = (int)CallStatusEnum.Scheduled
-            };
-            callManagementRepository.ScheduleCall(entity);
-            MoveLeadtoInProgressState(entity.ScheduledForId);
+                callGap = 1;
+                callFrequency = 15;
+            }
+            if(request.CallFrequency==2)//weekly
+            {
+                callGap = 7;
+                callFrequency = 4;
+            }
+            if(request.CallFrequency==3)//monthly
+            {
+                callGap = 30;
+                callFrequency = 3;
+            }
+            var scheduledEntities = new List<CallScheduleEntity>();
+            var currDate = DateTime.Parse(request.Time);
+            for (int i=0;i<callFrequency;i++)
+            {
+                scheduledEntities.Add(new CallScheduleEntity
+                {
+                    ScheduledForId = new Guid(request.CompanyId),
+                    ScheduledWithId = new Guid(request.PocId),
+                    ScheduledById = new Guid(currentUser),
+                    CallerId = new Guid(currentUser),
+                    ScheduledAt = currDate,
+                    Comment = string.IsNullOrEmpty(request.Comment) ? "NEW Call" : request.Comment,
+                    CreatedAt = DateTime.Now,
+                    CallStatusId = (int)CallStatusEnum.Scheduled
+                });
+                currDate = currDate.AddDays(callGap);
+            }
+            callManagementRepository.AddCallList(scheduledEntities);
+            MoveLeadtoInProgressState(scheduledEntities[0].ScheduledForId);
             return 0;
         }
 

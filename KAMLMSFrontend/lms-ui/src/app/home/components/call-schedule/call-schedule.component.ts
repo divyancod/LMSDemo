@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { CallFrequency } from 'src/app/models/CallsModel';
 import { WorkingHours } from 'src/app/models/LeadsModel';
 import { PocDetailsMin } from 'src/app/models/POCModel';
 import { LeadsService } from 'src/app/service/leads.service';
@@ -24,6 +25,8 @@ export class CallScheduleComponent implements OnInit {
   pocList: PocDetailsMin[] = []
   errorMessage: string = ''
   outsideWorkHour:boolean = false;
+  callFrequency:CallFrequency[] = [{id:0,frequency:"Single Call"},{id:1,frequency:"Daily"},{id:2,frequency:"Weekly"},{id:3,frequency:"Monthly"}]
+  selectedFrequency:number = 0;
 
   constructor(private leadService: LeadsService, public activeModal: NgbActiveModal) { }
 
@@ -53,7 +56,8 @@ export class CallScheduleComponent implements OnInit {
       companyId: this.companyId,
       pocId: this.pocId,
       time: this.model.Time,
-      comment: this.model.Comment
+      comment: this.model.Comment,
+      callFrequency:this.selectedFrequency
     };
     this.leadService.scheduleCall(payload).subscribe(data => {
       this.activeModal.close();

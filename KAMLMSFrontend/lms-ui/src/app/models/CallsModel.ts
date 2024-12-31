@@ -21,3 +21,9 @@ export interface FilterCallStatusModel
     callStatusModel:CallStatusModel,
     isSelected:boolean;
 }
+
+export interface CallFrequency
+{
+    id:number;
+    frequency:string;
+}

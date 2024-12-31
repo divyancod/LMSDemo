@@ -30,5 +30,6 @@ namespace KAMLMSRepository.Interfaces
         IList<FollowUpResponse> AtRisk(int page, int take);
         IList<FollowUpResponse> MissedCalls(int page, int take);
         void CancelAllCallsForLead(Guid id);
+        void AddCallList(IList<CallScheduleEntity> request);
     }
 }

@@ -1,7 +1,41 @@
 
 # Key Account Management Lead Management System
 
-This web application is desgined for the account managers to manage leads and track according to the requirements and info. Built on .NET and Angular providing flexibility.
+This web application is designed for the account managers to manage leads and track according to the requirements and info. Built on .NET and Angular providing flexibility.
+
+# Features
+
+1. **Authentication and Authorization** to access the platform.
+2. **Add Lead** - Add your leads with leads data.
+3. 5 States for leads - **NEW, IN PROGRESS, FollowUP, Closed Won, Closed Lost**
+4. **Point Of Contact** - Add any point of contact with system built in **roles** with the flexibility to add **CUSTOM ROLE** if system built in roles doesn't match the ROLE of POC. 
+5. Dashboard endpoints to populate data on dashboard with 
+	1. **Todays Calls** - Call scheduled for today
+	2. **At Risk Leads** - Leads that are at risk of being lost.
+	3. **Upcoming follow up of months.** - Prepare your month by tracking upcoming scheduled calls.
+6. Option to Add POC while adding a lead and schedule call with the lead.
+7. Once call is scheduled the lead will automatically moves to **In Progress** state.
+8. If there is any missed call and no activity on lead for PAST 10 DAYS the lead will show as **AT RISK**.
+9. Schedule call with any POC with flexibility.
+	1. Schedule **Single call if required**
+	2. Schedule **Call frequency** with options like **Daily, Weekly and Monthly**
+10. Comprehensive **CALL STATES** with options like
+	1.  **Rescheduling feature** - Moves the current call to reschedule state and schedule another call on desired date.
+	2. **Completed** - To ensure call purpose is completed.
+	3. **Waiting** - In case of lead is busy for a call.
+	4. **Answered** - If LEAD is requiring some information same day.
+	5. **UnAnswered** - If Lead didn't picked the phone and not sure what needs to be done for the next call
+	6. **Cancelled** - If required to cancel the scheduled call.
+11. List all calls logs at single location with **FILTERING OPTION**
+
+# Code features
+1. Backend on .NET 8 with flexibility of hosting.
+2. Angular frontend to enhanced user experience.
+3. Use of Entity framework as **ORM** with custom written **Stored procedures** to fetch required data as per will.
+4. Separation of concern for all controllers with **RESTFUL** architecture.
+5. Modular code with **MODEL** layer **Service** layer and **Repository** layer to accommodate upcoming changes with ease.
+6. **Request and Response** Contracts for easy data binding.
+
 ## System Requirements
 
 **Backend**  
